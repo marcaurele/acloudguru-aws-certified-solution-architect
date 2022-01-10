@@ -1,0 +1,8 @@
+encryptionsalt: v1:In6FY/YfFqg=:v1:Qchh61dy2aMEgks7:SL+RQf6P9/v/79tnBotoeWYD9JxnYQ==
+config:
+  01-iam-roles:awsaccount: "477889755370"
+  01-iam-roles:bucket:
+    appconfigs:
+    - cfst-3352-9978964fdabf1ef5c361a3f8-appconfigprod1-5y6eie0ygfn9
+    - cfst-3352-9978964fdabf1ef5c361a3f8-appconfigprod2-15wrse4wspwav
+  aws:region: us-east-1

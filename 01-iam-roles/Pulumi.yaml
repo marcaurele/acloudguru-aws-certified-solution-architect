@@ -1,0 +1,6 @@
+name: 01-iam-roles
+runtime:
+  name: python
+  options:
+    virtualenv: venv
+description: Create and Assume Roles in AWS
