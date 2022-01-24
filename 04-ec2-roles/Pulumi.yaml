@@ -1,0 +1,6 @@
+name: 04-ec2-roles
+runtime:
+  name: python
+  options:
+    virtualenv: venv
+description: A minimal AWS Python Pulumi program
