@@ -1,0 +1,4 @@
+encryptionsalt: v1:FjO+aRaxTKM=:v1:qxscXBjlfdliQ93H:Xp9o0L2u4wijIUJoZQPNVLsgnzb7uA==
+config:
+  07-wordpress-rds:securityGroupId: sg-06c80e761ccbdcccf
+  aws:region: us-east-1
