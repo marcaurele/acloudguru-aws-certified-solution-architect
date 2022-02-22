@@ -1,0 +1,4 @@
+encryptionsalt: v1:JjnGSP76rb4=:v1:t8qG6gSUYbCDBLd/:buS73YaNOdfWO1a3udzWsgOmclFEOA==
+config:
+  08-alb:securityGroupId: sg-0c8fa271551132bb1
+  aws:region: us-east-1
