@@ -21,3 +21,11 @@ Exercise 1, remove permission on the group fo developer and fetch AWS account ke
 - default VPC is user friendly with things already defined with internet access (public + private IP), having `172.31.0.0/16`.
 - AWS keeps 5 IPv4 addresses for them (0,1,2,3,255).
 - NACL: only 1 per subnet, rules evaluated from lowest numbered rule, stateless so require inbound + outbound rules. Way to block IP Addresses to access VPC. Ephemereal ports issue as they must be defined in rule.
+
+## Pulumi notes
+
+```console
+export AWS_ACCESS_KEY_ID=
+export AWS_SECRET_ACCESS_KEY=
+export PULUMI_CONFIG_PASSPHRASE=
+```
