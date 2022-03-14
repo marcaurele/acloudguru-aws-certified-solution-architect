@@ -1,0 +1,5 @@
+encryptionsalt: v1:C8o1n/414jM=:v1:DERddywLlYd/Np8u:vcm0zSkAhKwp2JDQ9eVwkabI0OLC/A==
+config:
+  09-vpcflowlog:flowBucket: arn:aws:s3:::cfst-3029-7441cc629fdc8fd78b490-vpcflowlogsbucket-ca63li1qhklz
+  09-vpcflowlog:flowIAMDeliverRole: arn:aws:iam::741637064163:role/cfst-3029-7441cc629fdc8fd78-DeliverVPCFlowLogsRole-4O5YPVVSRXTG
+  aws:region: us-east-1
