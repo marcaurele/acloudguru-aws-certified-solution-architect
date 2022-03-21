@@ -71,6 +71,10 @@ query language for S3 data
 
 - 15 min max, 10GB RAM max
 
+### EventBridge
+
+CloudWatch Events version 2.0. Event based lambda function trigger.
+
 ## Pulumi notes
 
 ```console
