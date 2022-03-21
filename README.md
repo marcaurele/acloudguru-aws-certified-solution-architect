@@ -15,6 +15,7 @@ Exercise 1, remove permission on the group fo developer and fetch AWS account ke
 ## RDS
 
 - 35 days max for backups
+- MySQL engine, not MariaDB!
 
 ### VPC
 
@@ -74,6 +75,22 @@ query language for S3 data
 ### EventBridge
 
 CloudWatch Events version 2.0. Event based lambda function trigger.
+
+### AWS Shield
+
+DDoS protection
+
+### Guard duty
+
+Protection looking at logs (VPC flow, DNS, ...) based on AI to learn behavior.
+
+### Macie
+
+Monitoring of S3 buckets for sensitive data. Usefull for GDPR.
+
+### Parameter store
+
+Max 10'000 items.
 
 ## Pulumi notes
 
