@@ -92,6 +92,35 @@ Monitoring of S3 buckets for sensitive data. Usefull for GDPR.
 
 Max 10'000 items.
 
+### System Manager
+
+- run command on your hosts
+- require the system manager to be installed and a role
+- Automation document / Runbook to fix S3 permissions for example, configure inside EC2 instances
+- free when running for AWS resources.
+
+### CloudFront
+
+- global distributuin, no specific countries
+- can force an expiration of content from the cache without waiting for TTL
+- only solution to have TPPS in front of S3 bucket website
+
+### Organizations
+
+- create a dedicated account for logging
+- consolidated billing
+- service control policies (limit what user can do in account) - even applied to the root account, and only way to restrict that root account.
+
+### Resource Access Manger (RAM)
+
+Share resources across accounts, like VPC, subnets, internet gateway, ... so remove the need to create those everywhere.
+
+### AWS Config
+
+- allow to query by resource type, tag, even to see deleted architecture
+- enforce: to flag when something is going wrong/rule violated, and can trigger a fix
+- history: when did it change, who made the call?
+
 ## Pulumi notes
 
 ```console
