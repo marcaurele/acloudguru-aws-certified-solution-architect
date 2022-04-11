@@ -109,7 +109,7 @@ Max 10'000 items.
 
 - create a dedicated account for logging
 - consolidated billing
-- service control policies (limit what user can do in account) - even applied to the root account, and only way to restrict that root account.
+- service control policies (SCP) (limit what user can do in account) - even applied to the root account, and only way to restrict that root account.
 
 ### Resource Access Manger (RAM)
 
@@ -120,6 +120,16 @@ Share resources across accounts, like VPC, subnets, internet gateway, ... so rem
 - allow to query by resource type, tag, even to see deleted architecture
 - enforce: to flag when something is going wrong/rule violated, and can trigger a fix
 - history: when did it change, who made the call?
+
+### AWS Trusted Advisor
+
+- cost optimization: are you spending money on resources that aren't needed
+- performance: are your services configured properly?
+- security: is your AWS architecture full of vulnerabilities?
+- fault tolerance: are you protected when something fails?
+- service limits: do you have room to scale?
+
+Will not fix the service, but can be connected to Lambdas.
 
 ## Pulumi notes
 
