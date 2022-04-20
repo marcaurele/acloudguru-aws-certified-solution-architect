@@ -136,6 +136,36 @@ Share resources across accounts, like VPC, subnets, internet gateway, ... so rem
 
 Will not fix the service, but can be connected to Lambdas.
 
+### Storage Gateway
+
+#### File Gateway
+
+- NFS or SMB mont
+- extend on prem storage or backup
+
+#### Volume Gateway
+
+- ISCI mount
+- cached or stored mde
+- perfect for migration or backup
+
+#### Tape Gateway
+
+- replace phyiscal tapes
+- ISCI VTL
+
+### DataSync
+
+To migrate data on the cloud: S3, EFS or FSx. Great for one time migration of file shares versus storage gateway. Agent based to be installed on prem.
+
+### Transfer Family
+
+Allow to easily move files in and out of S3 or EFS using SFTP, FTPS or FTP. _For legacy tools._
+
+### AWS Migration Hub
+
+Single place to track progress of your application migration service. Mainly for VSpehere and SQL databases migration.
+
 ## Pulumi notes
 
 ```console
