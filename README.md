@@ -23,6 +23,11 @@ Exercise 1, remove permission on the group fo developer and fetch AWS account ke
 - AWS keeps 5 IPv4 addresses for them (0,1,2,3,255).
 - NACL: only 1 per subnet, rules evaluated from lowest numbered rule, stateless so require inbound + outbound rules. Way to block IP Addresses to access VPC. Ephemereal ports issue as they must be defined in rule.
 
+### Autoscaling
+
+Use Launch Template (recommanded by AWS), Launch Configuration is "deprecated" (like version 1).
+In a Launch Template, all attributes cannot be overriden in the autoscalling group, like the keypair.
+
 ### SQS
 
 Know the defaults for the exam!
