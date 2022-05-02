@@ -165,11 +165,3 @@ Allow to easily move files in and out of S3 or EFS using SFTP, FTPS or FTP. _For
 ### AWS Migration Hub
 
 Single place to track progress of your application migration service. Mainly for VSpehere and SQL databases migration.
-
-## Pulumi notes
-
-```console
-export AWS_ACCESS_KEY_ID=
-export AWS_SECRET_ACCESS_KEY=
-export PULUMI_CONFIG_PASSPHRASE=
-```
