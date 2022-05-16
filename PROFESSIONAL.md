@@ -179,7 +179,29 @@ _Redshift: name coming from moving away from Oracle datawarehouse / red logo col
 - VPC peering: no transitive connection between multiple VPCs, need to set a route
 - AWS PrivateLink: connection between VPCs, AWS services using interface endpoints. Pro: redundant, use AWS backbones. 1 interface gateway endpoint (dynamo and S3), the other are interface endpoint. For Gateway endpoints, security is with VPC Endpoint Policies.
 - Egress-Only Internet Gateway: for IPv6 only as all addresses are public by default, this is stateful, must create a custom route `::/0`, to use instead of NAT IPv4.
+- NAT Gateway is AWS managed, versus NAT Instance which a simple EC2 instance acting as a NAT. Gateway is high available in the AZ, not the NAT Instance.
+
+### Enhanced networking
+
+- custom virtual AWS network interface to get higher speed, available in AWS Linux AMI automatically.
+- placement groups:
+  - clustered: into single AZ
+  - spread: max 7 instances per group
+  - partition: extended spread when logical partition can be attached on the same rack hardware for performance, while still spreading the total cluster across multiple rack to ensure HA.
+
+### Route53
+
+- policies: simple, failover, geolocation, geoproximity, latency, multi-answers, weighted.
 
 ### Documentation
 
-- Amazon Global Network Architecture: <https://www.youtube.com/watch?v=uj7Ting6Ckk>
+- [AWS re:Invent 2016: Amazon Global Network Overview with James Hamilton](https://www.youtube.com/watch?v=uj7Ting6Ckk)
+- [Amazon Virtual Private Cloud
+Connectivity Options](https://d0.awsstatic.com/whitepapers/aws-amazon-vpc-connectivity-options.pdf)
+- [Integrating AWS with
+Multiprotocol Label Switching](https://d1.awsstatic.com/whitepapers/Networking/integrating-aws-with-multiprotocol-label-switching.pdf)
+- [Security in Amazon Virtual Private Cloud](https://docs.aws.amazon.com/vpc/latest/userguide/security.html)
+- [AWS re:Invent 2017: Networking Many VPCs: Transit and Shared Architectures](https://www.youtube.com/watch?v=KGKrVO9xlqI)
+- [AWS re:Invent 2017: Another Day, Another Billion Flows](https://www.youtube.com/watch?v=8gc2DgBqo9U)
+- [AWS re:Invent 2017: Deep Dive into the New Network Load Balancer](https://www.youtube.com/watch?v=z0FBGIT1Ub4)
+- [MLPS](https://aws.amazon.com/blogs/networking-and-content-delivery/tag/mpls/)
