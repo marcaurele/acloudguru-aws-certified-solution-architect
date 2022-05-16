@@ -64,6 +64,8 @@ Important:
 - Anti-patterns:
   - automated scaling: use DynamoDB (if possible)
   - complete control over the DB: use EC2
+- Mutli-AZ for failover
+- Read replicas for performance
 
 ### DynamoDB
 
@@ -162,3 +164,22 @@ _Redshift: name coming from moving away from Oracle datawarehouse / red logo col
 - [AWS re:Invent 2017: ElastiCache Deep Dive: Best Practices and Usage Patterns](https://www.youtube.com/watch?v=_YYBdsuUq2M)
 - [AWS re:Invent 2017: Deep Dive: Using Hybrid Storage with AWS Storage Gateway to Solve On-Premises Storage Problems](https://www.youtube.com/watch?v=9wgaV70FeaM)
 - <https://d1.awsstatic.com/whitepapers/cost-optimization-storage-optimization.pdf>
+
+## Network
+
+- 5 addresses are not usable in each range (0=NetAddress,1=AWS-VPC-router,2=AWS-DNS,3=AWS-Future-Use,255=Broadcast=Reserved-as-not-usable)
+
+### Services
+
+- AWS managed VPN: simple VPN connection
+- AWS Direct Connect: dedicated network connection to AWS backbone (not encrypted by default - use AWS Direct Connect Plus VPN)
+- AWS VPN CloudHub:
+- Software VPN: provide your own VPN like OpenVPN
+- Transit VPC: connecting geographically disperse VPCs (like a hub of VPCs), also to connect external providers VPCs like Azure.
+- VPC peering: no transitive connection between multiple VPCs, need to set a route
+- AWS PrivateLink: connection between VPCs, AWS services using interface endpoints. Pro: redundant, use AWS backbones. 1 interface gateway endpoint (dynamo and S3), the other are interface endpoint. For Gateway endpoints, security is with VPC Endpoint Policies.
+- Egress-Only Internet Gateway: for IPv6 only as all addresses are public by default, this is stateful, must create a custom route `::/0`, to use instead of NAT IPv4.
+
+### Documentation
+
+- Amazon Global Network Architecture: <https://www.youtube.com/watch?v=uj7Ting6Ckk>
