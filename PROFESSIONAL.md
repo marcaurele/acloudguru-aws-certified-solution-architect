@@ -155,7 +155,7 @@ _Redshift: name coming from moving away from Oracle datawarehouse / red logo col
 
 - Based on Ether
 
-### Whitepapers
+### Data models documentation
 
 - <https://d1.awsstatic.com/whitepapers/Storage/AWS%20Storage%20Services%20Whitepaper-v9.pdf>
 - <https://d1.awsstatic.com/whitepapers/Multi_Tenant_SaaS_Storage_Strategies.pdf>
@@ -167,7 +167,8 @@ _Redshift: name coming from moving away from Oracle datawarehouse / red logo col
 
 ## Network
 
-- 5 addresses are not usable in each range (0=NetAddress,1=AWS-VPC-router,2=AWS-DNS,3=AWS-Future-Use,255=Broadcast=Reserved-as-not-usable)
+- 5 addresses are not usable in each range (0=NetAddress,1=AWS-VPC-router,2=AWS-DNS,3=AWS-Future-Use,255=Broadcast=Reserved-as-not-usable).
+- VPCs support IPv4 netmask range from /16 to /28.
 
 ### Services
 
@@ -193,7 +194,7 @@ _Redshift: name coming from moving away from Oracle datawarehouse / red logo col
 
 - policies: simple, failover, geolocation, geoproximity, latency, multi-answers, weighted.
 
-### Documentation
+### Network documentation
 
 - [AWS re:Invent 2016: Amazon Global Network Overview with James Hamilton](https://www.youtube.com/watch?v=uj7Ting6Ckk)
 - [Amazon Virtual Private Cloud
@@ -208,13 +209,17 @@ Multiprotocol Label Switching](https://d1.awsstatic.com/whitepapers/Networking/i
 
 ## Security
 
+### Accounts
+
+![accounts structure](assets/2022-05-30_20-24.png)
+
 ### AWS Directory Services
 
 - AWS Cloud Directory: cloud-native directory to share and control access to hierachical data between applications
 - Amazon Cognito: Sign-up and Sign-in functionality that scales and federated to public social media services
 - AWS Directory Service for MS AD: AWS-managed full Microsft AD
 - AD Connector: Allow on-prem users to log in into AWS using existing AD credentials. Allow also EC2 to join AD domain. Can used IAM roles. Support Radius MFA.
-- Simple AD: low scale, low cost AD implementation based on Samba (simple user directory with LDAP compatibility). MFA not supported. Kerberos based SSO.
+- Simple AD: low scale, low cost AD implementation based on Samba (simple user directory with LDAP compatibility). MFA not supported. Kerberos based SSO. Does not support trust relationship with other domains.
 
 ### DDoS
 
@@ -243,7 +248,7 @@ Multiprotocol Label Switching](https://d1.awsstatic.com/whitepapers/Networking/i
     - why: adjust product attributes based on choices a user makes (ex: only allow certain instances types for DEV environment).
 - can be shared through multi-account with the templates within the master. Auto cascading of changes to sub accounts. Must rewrite launch stack to target the sub-account otherwise it will try in the main one (owner of the template)
 
-### Documentation
+### Security documentation
 
 - [Organizing Your AWS Environment Using Multiple Accounts](https://docs.aws.amazon.com/whitepapers/latest/organizing-your-aws-environment/organizing-your-aws-environment.html)
 - [AWS Best Practices for DDoS Resiliency](https://d1.awsstatic.com/whitepapers/Security/DDoS_White_Paper.pdf)
@@ -252,3 +257,38 @@ Multiprotocol Label Switching](https://d1.awsstatic.com/whitepapers/Networking/i
 - [AWS re:Invent 2017: Architecting Security and Governance Across a Multi-Account Stra](https://www.youtube.com/watch?v=71fD8Oenwxc)
 - [AWS re:Inforce 2019: Managing Multi-Account AWS Environments Using AWS Organizations](https://www.youtube.com/watch?v=fxo67UeeN1A)
 - [AWS Well-Architected Framework - Security Pillar](https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/wellarchitected-security-pillar.pdf)
+
+## Migrations
+
+### Strategies
+
+- Re-host: lift ans shift
+- Re-platform: Lift and reshape
+- Re-Purchase: drop and shop
+- Reachitect: redesign in a cloud native manner
+- Retire: get rid of apps not needed
+- Retain: do nothing option
+
+### Cloud Adoption Framework
+
+<https://aws.amazon.com/professional-services/CAF/>
+
+### Migration tools
+
+- Server migration: agent for Vmware or HyperV to clone and periodically sync AMI changes to move or backup/recovery image on the cloud.
+- Database migration service: can use a data conversion tool to help migrating to cloud DB (Redshift, RDS, Dynamodb)
+- Application Discovery Service: collects config, usage and bhavior data from on prem servers to help estimate TCO of running on AWS. Gather information about on-prem data centers (inventory).
+
+### Network migrations and cutovers
+
+Start with VPN connection from on-prem. Later move to Direct Connect (BGP) with VPN as backup, requires to setup BGP preferences to use the Direct Connect link instead of the VPN (while having the same BGP prefix for both). On AWS Direct Conenct is always the preferred route.
+
+### Migration documentation
+
+- [AWS Migration Whitepaper](https://d1.awsstatic.com/whitepapers/Migration/aws-migration-whitepaper.pdf)
+- [Overview of AWS Cloud Adoption Framework](https://docs.aws.amazon.com/whitepapers/latest/overview-aws-cloud-adoption-framework/overview-aws-cloud-adoption-framework.pdf)
+- [Migrating Applications Running Relational Databases to AWS](https://d1.awsstatic.com/whitepapers/Migration/migrating-applications-to-aws.pdf)
+- [Cloud-Driven Enterprise Transformation on AWS](https://d1.awsstatic.com/whitepapers/cloud-driven-enterprise-transformation-on-aws.pdf?did=wp_card&trk=wp_card)
+- [AWS re:Invent 2017: How to Assess Your Organization's Readiness to Migrate at Scale](https://www.youtube.com/watch?v=id-PY0GBHXA)
+- [AWS re:Invent 2017: Migrating Databases and Data Warehouses to the Cloud](https://www.youtube.com/watch?v=Y33TviLMBFY)
+- [AWS re:Invent 2017: Deep Dive: Using Hybrid Storage with AWS Storage Gateway to Solve Pn-Prem Storage Problems](https://www.youtube.com/watch?v=9wgaV70FeaM)
