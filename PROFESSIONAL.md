@@ -205,3 +205,50 @@ Multiprotocol Label Switching](https://d1.awsstatic.com/whitepapers/Networking/i
 - [AWS re:Invent 2017: Another Day, Another Billion Flows](https://www.youtube.com/watch?v=8gc2DgBqo9U)
 - [AWS re:Invent 2017: Deep Dive into the New Network Load Balancer](https://www.youtube.com/watch?v=z0FBGIT1Ub4)
 - [MLPS](https://aws.amazon.com/blogs/networking-and-content-delivery/tag/mpls/)
+
+## Security
+
+### AWS Directory Services
+
+- AWS Cloud Directory: cloud-native directory to share and control access to hierachical data between applications
+- Amazon Cognito: Sign-up and Sign-in functionality that scales and federated to public social media services
+- AWS Directory Service for MS AD: AWS-managed full Microsft AD
+- AD Connector: Allow on-prem users to log in into AWS using existing AD credentials. Allow also EC2 to join AD domain. Can used IAM roles. Support Radius MFA.
+- Simple AD: low scale, low cost AD implementation based on Samba (simple user directory with LDAP compatibility). MFA not supported. Kerberos based SSO.
+
+### DDoS
+
+- minimize surface attack: NACLs, SGs, VPC design
+- scale to absorb: auto scaling groups, CloudFront, Static website on S3
+- safeguard exposed resources: route53, AWS WAF, AWS Shield
+- learn normal behavior: AWS GuardDuty, CloudWatch
+
+### AWS Service Catalog
+
+- framework allowing administrators to create pre-definied products and landscapes for their users.
+- granular control over which users have access to hwhich offerings
+- makes use of adopted IAM roles so users don't need underlying service access
+- allow end users to be self-sufficient while upholding enterprise standards for deployments
+- based on CloudFormation templates
+- administrators can version and remove products. Existing running product versions will not be shutdown.
+- use constraints:
+  - Launch constraint
+    - what: IAM role that Service Catalog assumes when an end-user launches a product.
+    - why: without a launch constraint, the end-user must have all permissions needed within their own IAM credentials.
+  - Notification Constraint:
+    - what: specifies the Amazon SNS topic to receive notifications about stack events.
+    - why: can get notifications when products are maunched or have problems.
+  - Template Constraint:
+    - what: one or more rules that narrow allowable values an end-user can select.
+    - why: adjust product attributes based on choices a user makes (ex: only allow certain instances types for DEV environment).
+- can be shared through multi-account with the templates within the master. Auto cascading of changes to sub accounts. Must rewrite launch stack to target the sub-account otherwise it will try in the main one (owner of the template)
+
+### Documentation
+
+- [Organizing Your AWS Environment Using Multiple Accounts](https://docs.aws.amazon.com/whitepapers/latest/organizing-your-aws-environment/organizing-your-aws-environment.html)
+- [AWS Best Practices for DDoS Resiliency](https://d1.awsstatic.com/whitepapers/Security/DDoS_White_Paper.pdf)
+- [AWS re:Invent 2017: Best Practices for Managing Security Operations on AWS](https://www.youtube.com/watch?v=gjrcoK8T3To)
+- [AWS re:Invent 2018: [REPEAT 1] Become an IAM Policy Master in 60 Minutes or Less](https://www.youtube.com/watch?v=YQsK4MtsELU)
+- [AWS re:Invent 2017: Architecting Security and Governance Across a Multi-Account Stra](https://www.youtube.com/watch?v=71fD8Oenwxc)
+- [AWS re:Inforce 2019: Managing Multi-Account AWS Environments Using AWS Organizations](https://www.youtube.com/watch?v=fxo67UeeN1A)
+- [AWS Well-Architected Framework - Security Pillar](https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/wellarchitected-security-pillar.pdf)
