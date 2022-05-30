@@ -1,0 +1,6 @@
+name: 02-air-quality
+runtime:
+  name: python
+  options:
+    virtualenv: venv
+description: Demo Air Quality Analysis
