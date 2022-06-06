@@ -292,3 +292,65 @@ Start with VPN connection from on-prem. Later move to Direct Connect (BGP) with 
 - [AWS re:Invent 2017: How to Assess Your Organization's Readiness to Migrate at Scale](https://www.youtube.com/watch?v=id-PY0GBHXA)
 - [AWS re:Invent 2017: Migrating Databases and Data Warehouses to the Cloud](https://www.youtube.com/watch?v=Y33TviLMBFY)
 - [AWS re:Invent 2017: Deep Dive: Using Hybrid Storage with AWS Storage Gateway to Solve Pn-Prem Storage Problems](https://www.youtube.com/watch?v=9wgaV70FeaM)
+
+
+## Architecting to Scale
+
+- scale in + scale out = horizontal scaling terms
+- scale up + scale down = vertical scaling terms
+
+### Auto scaling
+
+- autoscaling launch configuration cannot be edited.
+- terminate the oldest first, and try to spread the termination over the AZs.
+
+### Kinesis
+
+- collection of services for processing streams of various data.
+- data is processed in "shards" - with each shart able to ingest 1000 records per second.
+- a default limit of 500 shards, but can be increase to unlimited
+- record consists of partition key, sequence number and data blob (up to 1MB)
+- transient data store - default retention of 24 hours, but can be configured for up to 7 days.
+
+### SQS
+
+- KMS encryption available to encrypt messages.
+- transient storage - default 4 days, max 14 days.
+- optionally support FIFO queue ordering
+- maximum message size of 256KB, but with a special Java SQS SDK, messages can be as large as 2GB (stored on S3).
+
+### Amazon MQ
+
+- managed implementation of Apache ActiveMQ
+- support JMS, NMS, MQTT, WebSocket
+- less features than SQS
+
+### Simple Workflow Service
+
+- create distributed asynchronous systems as workflows.
+- supports both sequential and parallel processing.
+- tracks state of your workflow which you interact and update via API.
+- best suited for human-enabled workflows like an order fulfillment.
+- AWS recommends new applications, look at Step Functions over SWF.
+
+### AWS Steps Fucntions
+
+- managed workflow and orchestration platform.
+- define your app as a state machine.
+- create tasks, sequential steps, paralelle steps, branching paths or timers.
+- amazon state language declarative JSON.
+- apps can interact and update the stream via Step Function API.
+- visual interface describes flow and realtime status.
+- detailed logs of each step execution.
+
+### Architecting to scale Documentation
+
+- [Web Application Hosting in the AWS Cloud](https://d1.awsstatic.com/whitepapers/aws-web-hosting-best-practices.pdf)
+- [Introduction to Scalable Gaming Patterns on AWS](https://d0.awsstatic.com/whitepapers/aws-scalable-gaming-patterns.pdf)
+- [Performance at Scale with Amazon ElastiCache](https://d0.awsstatic.com/whitepapers/performance-at-scale-with-amazon-elasticache.pdf)
+- [Automating Elasticity](https://d1.awsstatic.com/whitepapers/cost-optimization-automating-elasticity.pdf)
+- [AWS re:Invent 2017: Scaling Up to Your First 10 Million Users](https://www.youtube.com/watch?v=w95murBkYmU)
+- [AWS re:Invent 2017: Learn to Build a Cloud-Scale WordPress Site That Can Keep Up](https://www.youtube.com/watch?v=dPdac4LL884)
+- [AWS re:Invent 2017: Elastic Load Balancing Deep Dive and Best Practices](https://www.youtube.com/watch?v=9TwkMMogojY)
+- [AWS Well-Architected Framework](https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html)
+- [Implementing Microservices on AWS](https://docs.aws.amazon.com/whitepapers/latest/microservices-on-aws/microservices-on-aws.pdf)
