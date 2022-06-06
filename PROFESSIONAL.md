@@ -109,6 +109,8 @@ If you need to:
 - postgresql compatible with JDBC and ODBC drivers
 - parallel processing and columnar data stores
 - option to directly query files from s3 via redshift spectrum
+- does not support multi-AZ deployments.
+- best HA option is to use a multi-node clusters which support data replication and node recovery.
 
 _Redshift: name coming from moving away from Oracle datawarehouse / red logo color._
 
@@ -354,3 +356,21 @@ Start with VPN connection from on-prem. Later move to Direct Connect (BGP) with 
 - [AWS re:Invent 2017: Elastic Load Balancing Deep Dive and Best Practices](https://www.youtube.com/watch?v=9TwkMMogojY)
 - [AWS Well-Architected Framework](https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html)
 - [Implementing Microservices on AWS](https://docs.aws.amazon.com/whitepapers/latest/microservices-on-aws/microservices-on-aws.pdf)
+
+## Business Continuity
+
+- RTO: Recovery Time Objective
+- RPO: Recovery Point Objective (acceptable amount of data loss measured in time)
+
+![RTP - RPO](./assets/2022-06-06_20-42.png)
+
+![HA - DR - RPO](./assets/2022-06-06_20-44.png)
+
+### Business Continuity Documentation
+
+- [AWS Prescriptive Guidance / Backup and recovery approaches on AWS](https://docs.aws.amazon.com/prescriptive-guidance/latest/backup-recovery/backup-recovery.pdf)
+- [Getting Started with Amazon Aurora](https://d1.awsstatic.com/whitepapers/getting-started-with-amazon-aurora.pdf)
+- [Reliability Pillar / AWS Well-Architected Framework](https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/wellarchitected-reliability-pillar.pdf)
+- [AWS re:Invent 2017: Models of Availability](https://www.youtube.com/watch?v=xc_PZ5OPXcc)
+- [AWS re:Invent 2017: How to Design a Multi-Region Active-Active Architecture](https://www.youtube.com/watch?v=RMrfzR4zyM4)
+- [AWS re:Invent 2017: Disaster Recovery with AWS: Tiered Approaches to Balance Cost with Recovery Objectives](https://www.youtube.com/watch?v=a7EMou07hRc)
