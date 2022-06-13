@@ -295,7 +295,6 @@ Start with VPN connection from on-prem. Later move to Direct Connect (BGP) with 
 - [AWS re:Invent 2017: Migrating Databases and Data Warehouses to the Cloud](https://www.youtube.com/watch?v=Y33TviLMBFY)
 - [AWS re:Invent 2017: Deep Dive: Using Hybrid Storage with AWS Storage Gateway to Solve Pn-Prem Storage Problems](https://www.youtube.com/watch?v=9wgaV70FeaM)
 
-
 ## Architecting to Scale
 
 - scale in + scale out = horizontal scaling terms
@@ -374,3 +373,28 @@ Start with VPN connection from on-prem. Later move to Direct Connect (BGP) with 
 - [AWS re:Invent 2017: Models of Availability](https://www.youtube.com/watch?v=xc_PZ5OPXcc)
 - [AWS re:Invent 2017: How to Design a Multi-Region Active-Active Architecture](https://www.youtube.com/watch?v=RMrfzR4zyM4)
 - [AWS re:Invent 2017: Disaster Recovery with AWS: Tiered Approaches to Balance Cost with Recovery Objectives](https://www.youtube.com/watch?v=a7EMou07hRc)
+
+## Deployment and Operations management
+
+### Elastic Beanstack
+
+_AWS PaaS_
+
+- Orchestration service to make it push-button easy to deploy scalable web landscapes.
+- Wide range of supported platforms (Docker, PHP, Java, Node.js...).
+- Multiple environments within the application (DEV, QA, ...).
+- Great for ease of deployment, but not great if you need lots of control and flexibility.
+
+### CloudFormation
+
+- using JSON or YAML to model and provision entire landscapes.
+- repeatable and automatic deployments and rollbacks.
+- terms:
+  - Templates (TF files): JSON/YAML file containing instructions for the building-out the AWS environment.
+  - Stacks (TF workspaces): the entire environment described by the template and created, updated and deleted as a single unit.
+  - Change sets (TF plan): a summary of proposed changes to your stack that will allow you to see how those changes might impact your existing resources before implementing them.
+- Stack policies deny you to do any update, so it must be declared in the policy to allow such operations.
+
+### Deployment and Operations management Documentation
+
+- [Overview of Deployment Options on AWS](https://d0.awsstatic.com/whitepapers/overview-of-deployment-options-on-aws.pdf)
