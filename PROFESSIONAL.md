@@ -395,6 +395,53 @@ _AWS PaaS_
   - Change sets (TF plan): a summary of proposed changes to your stack that will allow you to see how those changes might impact your existing resources before implementing them.
 - Stack policies deny you to do any update, so it must be declared in the policy to allow such operations.
 
+### AWS Config
+
+- Allow you to assess, audit and evaluate configurations of your AWS resources.
+- Very useful for Configuration Management as part of an ITIL program.
+- Creates a baseline of various configuration settings and files then can track drift.
+- Can check resources for certain desired conditions and if violations are found, the resource is flagged as _noncompliant_.
+
+### AWS OpsWorks
+
+- managed instance of Chef and Puppet.
+- OpsWorks Stack is Chef single agent, requires Stack in each region as it can only control resources in that same region.
+
+### AWS System Manager
+
+- inventory: collect inventory from OS, applications instances.
+- state-manager: creates state that represents a certain configuration is applied to instances
+- logging: CloudWatch Log agent streams logs directly to CloudWatch
+- parameter-store: shared secured storage for config data
+- resource-groups: group resource through tagging for organization
+- maintenance-window: define schedule for instances patch, update apps...
+- automation:automating routine maintenance tasks and scripts
+- run-command: run commands and scripts without loggin in via SHH/RDP
+- patch-manager: automates process of patching
+
+### Business Applications and End-USer Computing
+
+- Amazon Workspaces: remote desktop (full desktop)
+- Amazon AppStream: show only a hosted application (application hosting)
+- AWS Connect: center solution with configurable call
+- Amazon Chime: online meeting and video conferencing service
+- Amazon WorkDocs: like GDrive
+- Amazon WorkEmail: fully managed email service
+- Amazon WorkLink: provide secure access to internal web applications for mobile devices
+- Alexa for Businnes: Alexa functionnality and skills for internal in your enterprise
+
+### AWS Machine Learning
+
+- SageMaker: ML services managed by AWS
+- Amazon Comprehend: NLP
+- Amazon Polly: test tp speech in many languages
+
 ### Deployment and Operations management Documentation
 
 - [Overview of Deployment Options on AWS](https://d0.awsstatic.com/whitepapers/overview-of-deployment-options-on-aws.pdf)
+- [Infrastructure as Code](https://d1.awsstatic.com/whitepapers/DevOps/infrastructure-as-code.pdf)
+- [Practicing Continuous Integration and Continuous Delivery on AWS](https://d1.awsstatic.com/whitepapers/DevOps/practicing-continuous-integration-continuous-delivery-on-AWS.pdf)
+- [Overview of Deployment Options on AWS](https://d1.awsstatic.com/whitepapers/overview-of-deployment-options-on-aws.pdf)
+- [AWS re:Invent 2017: Deep Dive on AWS CloudFormation](https://www.youtube.com/watch?v=01hy48R9Kr8)
+- [AWS re:Invent 2017: Moving to Containers: Building with Docker and Amazon ECS](https://www.youtube.com/watch?v=Qik9LBktjgs)
+- [AWS re:Invent 2017: Continuous Integration Best Practices for Software Development Teams](https://www.youtube.com/watch?v=GEPJ7Lo346A)
