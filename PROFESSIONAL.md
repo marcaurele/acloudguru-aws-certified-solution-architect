@@ -376,9 +376,7 @@ Start with VPN connection from on-prem. Later move to Direct Connect (BGP) with 
 
 ## Deployment and Operations management
 
-### Elastic Beanstack
-
-_AWS PaaS_
+### Elastic Beanstack (AWS PaaS)
 
 - Orchestration service to make it push-button easy to deploy scalable web landscapes.
 - Wide range of supported platforms (Docker, PHP, Java, Node.js...).
