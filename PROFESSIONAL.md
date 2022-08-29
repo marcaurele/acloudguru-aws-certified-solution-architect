@@ -1,5 +1,7 @@
 # Solution Architect Professional
 
+<https://d1.awsstatic.com/training-and-certification/docs-sa-pro/AWS-Certified-Solutions-Architect-Professional_Exam-Guide_C02.pdf>
+
 ## Data models
 
 - ACID: Atomic, Consistency, Isolated, Durable - like databases
@@ -7,7 +9,10 @@
 
 Important:
 
-- read the AWS Storage options whitepaper and note anti-patterns
+- read the [AWS Storage options whitepaper](https://d1.awsstatic.com/whitepapers/aws-storage-options.pdf) and note anti-patterns
+  - ✔️ [Storage Best Practices for Data and Analytics Applications](https://docs.aws.amazon.com/whitepapers/latest/building-data-lakes/building-data-lake-aws.html)
+  - [SaaS Storage Strategies](https://docs.aws.amazon.com/whitepapers/latest/multi-tenant-saas-storage-strategies/multi-tenant-saas-storage-strategies.html)
+  - [Best Practices Design Patterns: Optimizing Amazon S3 Performance](https://docs.aws.amazon.com/whitepapers/latest/s3-optimizing-performance-best-practices/welcome.html?did=wp_card&trk=wp_card)
 - know when to use various data stores.
 
 ### Amazon S3
@@ -16,6 +21,15 @@ Important:
 - Maximum object size is 5TB, max object single PUT is 5GB
 - Recommended to use multi-part upload for file larger than 100MB
 - Get a good view of the S3 storage class available
+- Allow Torrent protocol, Hadoop distributed copy
+- Each S3 object can have up to 10 object tags
+- Each tag key can be up to 128 Unicode characters in length, and each tag value can be up to 256 Unicode characters in length
+
+#### S3 Object Lambda
+
+[S3 Object Lambda](https://aws.amazon.com/blogs/aws/introducing-amazon-s3-object-lambda-use-your-code-to-process-data-as-it-is-being-retrieved-from-s3/) uses a Lambda function to automatically process and transform the data as it is being retrieved from an S3 bucket.
+
+![S3 Object Lambda](https://docs.aws.amazon.com/whitepapers/latest/building-data-lakes/images/storage-best-practices8.png)
 
 ### Amazon Galcier
 
@@ -41,10 +55,33 @@ Important:
 - provides local storage resources backed by Glacier and S3
 - use in cloud migration or disaster recovery
 - different modes:
-  - file gateway
-  - volume gateway: async replication to s3
-  - volume gateway cached mode: isci with data stored in s3 with frequent accessed data local on disk
-  - tape gateway: virtual tape device for backups
+  - file gateway (optional cache mode): S3 bucket seen as NFS share for on-prem
+  - volume gateway (optional cache mode): async replication to s3 with ISCI
+  - tape gateway: virtual tape device for backups (ISCI VTL)
+
+Files written to this mount point are converted to objects stored in Amazon S3 in their original format without any proprietary modification. This means that you can integrate applications and platforms that don’t have native Amazon S3 capabilities.
+
+![AWS Storage Gateway is a set of hybrid cloud storage services that provide on-premises access to virtually unlimited cloud storage.](https://d1.awsstatic.com/pdp-how-it-works-assets/product-page-diagram_AWS-Storage-Gateway_HIW@2x.6df96d96cdbaa61ed3ce935262431aabcfb9e52d.png)
+
+### AWS DataSync
+
+AWS DataSync is a secure, online service that automates and accelerates moving data between on premises and AWS Storage services. DataSync can copy data between Network File System (NFS) shares, Server Message Block (SMB) shares, Hadoop Distributed File Systems (HDFS), self-managed object storage, AWS Snowcone, Amazon Simple Storage Service (Amazon S3) buckets, Amazon Elastic File System (Amazon EFS) file systems, Amazon FSx for Windows File Server file systems, Amazon FSx for Lustre file systems, Amazon FSz for OpenZFS file systems, and Amazon FSx for NetApp ONTAP file systems.
+
+![AWS DataSync](https://d1.awsstatic.com/Digital%20Marketing/House/Editorial/products/DataSync/Product-Page-Diagram_AWS-DataSync_On-Premises-to-AWS%402x.8769b9dea1615c18ee0597b236946cbe0103b2da.png)
+
+#### Versus Storage Gateway
+
+One is for optimized data movement, and the other is more suitable for hybrid architecture.
+
+*AWS DataSync* is ideal for online data transfers. You can use DataSync to migrate active data to AWS, transfer data to the cloud for analysis and processing, archive data to free up on-premises storage capacity, or replicate data to AWS for business continuity.
+
+*AWS Storage Gateway* is a hybrid cloud storage service that gives you on-premises access to virtually unlimited cloud storage.
+
+You can combine both services. Use AWS DataSync to migrate existing data to Amazon S3, and then use the File Gateway configuration of AWS Storage Gateway to retain access to the migrated data and ongoing updates from your on-premises file-based applications.
+
+### AWS Transfer Family
+
+AWS Transfer Family securely scales your recurring business-to-business file transfers to AWS Storage services using SFTP, FTPS, FTP, and AS2 protocols.
 
 ### Amazon WorkDocs
 
@@ -112,12 +149,60 @@ If you need to:
 - does not support multi-AZ deployments.
 - best HA option is to use a multi-node clusters which support data replication and node recovery.
 
-_Redshift: name coming from moving away from Oracle datawarehouse / red logo color._
+*Redshift: name coming from moving away from Oracle datawarehouse / red logo color.*
 
-### Mamazon Neptune
+#### Amazon Redshift Spectrum
+
+Same tool as Redshift but to run SQL queries against data stored on S3. Pricing based on the volume of data scanned to perform the query.
+
+### Amazon Kinesis Data Firehose
+
+Part of the Kinesis family of services that makes it easy to collect, process, and analyze real-time streaming data.
+
+- automatically scales to match the volume and throughput of streaming data
+- requires no ongoing administration
+- can also be configured to transform streaming data before it’s stored in a data lake built on Amazon S3:
+  - compression (**GZIP**, ZIP, and SNAPPY compression formats),
+  - encryption,
+  - data batching,
+  - and Lambda functions (to transform the input data to anything: JSON, Apache Parquet, Apache ORC).
+- can convert your input JSON data to Apache Parquet and Apache ORC before storing the data into your data lake (save space and allow faster queries)
+- can concatenate multiple incoming records, and then deliver them to Amazon S3 as a single S3 object.
+
+### AWS Glue
+
+Fully managed serverless ETL service that makes it easier to categorize, clean, transform, and reliably transfer data between different data stores.
+
+AWS Glue automatically and transparently provisions hardware resources, and distributes ETL jobs on Apache Spark nodes so that ETL run times remain consistent as data volume grows.
+
+![AWS Glue](https://docs.aws.amazon.com/whitepapers/latest/building-data-lakes/images/storage-best-practices6.png)
+
+### AWS Lake Formation
+
+AWS Lake Formation helps to easily build, secure, and manage data lakes. Lake Formation provides centralized governance and access control for the data in a data lake built on S3, and controls access to the data through various services, such as AWS Glue, Athena, Amazon Redshift Spectrum, Amazon QuickSight, and Amazon EMR. AWS Lake Formation can connect to an S3 bucket and orchestrate a dataflow that can ingest, clean, transform, and organize the raw data.
+
+Lake Formation uses AWS Glue Data Catalog to automatically classify data in data lakes, data sources, transforms, and targets. Apart from the metadata, the Data Catalog also stores information consisting of resource links to shared databases and tables in external accounts for cross account access to the data in a data lake built on S3.
+
+Lake Formation provides you with a grant/revoke permission model to control access to Data Catalog resources (consisting of database and metadata tables), S3 buckets and underlying data in these buckets. Lake Formation permissions along with IAM policies provide granular access to the data stored in data lakes built on S3. These permissions can be used to share Data Catalog resources with external AWS accounts. The users from these accounts can run jobs and queries by combining data from multiple data catalogs across multiple accounts.
+
+### Amazon EMR
+
+Amazon EMR is a highly distributed computing framework used to quickly and easily process data in a cost-effective manner. Amazon EMR uses Apache Hadoop, an open-source framework, to distribute data and processing across an elastically resizable cluster of EC2 instances and allows you to use all the common Hadoop tools such as Hive, Pig, Spark, Flink, Hudi, Hue, Livy, MXNet, Presto, TensorFlow, HBase, or Zeppelin. Amazon EMR does all the heavily lifting involved with provisioning, managing, and maintaining the infrastructure and software of a Hadoop cluster, and is integrated directly with S3.
+
+With Amazon EMR, you can launch a persistent cluster that stays up indefinitely or a temporary cluster that ends after the analysis is complete. In either scenario, you only pay for the hours the cluster is up.
+
+### Amazon Neptune
 
 - graph database fully managed
 - support open graph API
+
+### Amazon QuickSight
+
+Fast business analytics service that makes it easy for you to build visualizations, perform targeted analysis, and quickly get business insights from your data assets stored in the data lake, any time, on any device.
+
+### Amazon OpenSearch Service
+
+Managed service where you can deploy and manage OpenSearch clusters at scale. Common use cases include log analytics, real-time application monitoring, and clickstream analytics. Amazon OpenSearch Service can be used to add a search box to a website, analyze metrics, security event data, application and infrastructure logs, or store data to automate business workflows.
 
 ### Amazon Elasticache
 
@@ -144,10 +229,10 @@ _Redshift: name coming from moving away from Oracle datawarehouse / red logo col
 
 ### Amazon Athena
 
-- SQL engine overlaid on S3 base on Presto
+- SQL engine overlaid on S3 based on Presto
 - use or convert data to Parquet format for big performance jump
 - similar to Redshit spectrum
-- format available for query ares: Parquet, JSON, Apache ORC but not XML
+- format available for query ares: Parquet, JSON, Apache ORC **but not XML**.
 
 ### Amazon Quantum Ledger Database (QLDB)
 
@@ -250,6 +335,10 @@ Multiprotocol Label Switching](https://d1.awsstatic.com/whitepapers/Networking/i
     - why: adjust product attributes based on choices a user makes (ex: only allow certain instances types for DEV environment).
 - can be shared through multi-account with the templates within the master. Auto cascading of changes to sub accounts. Must rewrite launch stack to target the sub-account otherwise it will try in the main one (owner of the template)
 
+### Amazon Macie
+
+Fully managed data security and data privacy service that uses machine learning and pattern matching to discover, monitor, and protect your sensitive data stored in your data lake. Macie can be used to scan your data lakes and discover sensitive information such as PII or financial data, and identify and report overly permissive or unencrypted buckets.
+
 ### Security documentation
 
 - [Organizing Your AWS Environment Using Multiple Accounts](https://docs.aws.amazon.com/whitepapers/latest/organizing-your-aws-environment/organizing-your-aws-environment.html)
@@ -334,7 +423,7 @@ Start with VPN connection from on-prem. Later move to Direct Connect (BGP) with 
 - best suited for human-enabled workflows like an order fulfillment.
 - AWS recommends new applications, look at Step Functions over SWF.
 
-### AWS Steps Fucntions
+### AWS Steps Functions
 
 - managed workflow and orchestration platform.
 - define your app as a state machine.
@@ -398,7 +487,7 @@ Start with VPN connection from on-prem. Later move to Direct Connect (BGP) with 
 - Allow you to assess, audit and evaluate configurations of your AWS resources.
 - Very useful for Configuration Management as part of an ITIL program.
 - Creates a baseline of various configuration settings and files then can track drift.
-- Can check resources for certain desired conditions and if violations are found, the resource is flagged as _noncompliant_.
+- Can check resources for certain desired conditions and if violations are found, the resource is flagged as *noncompliant*.
 
 ### AWS OpsWorks
 
@@ -430,7 +519,7 @@ Start with VPN connection from on-prem. Later move to Direct Connect (BGP) with 
 
 ### AWS Machine Learning
 
-- SageMaker: ML services managed by AWS
+- SageMaker: machine learning service managed by AWS (build, train and deploy models)
 - Amazon Comprehend: NLP
 - Amazon Polly: test tp speech in many languages
 
@@ -452,3 +541,7 @@ Start with VPN connection from on-prem. Later move to Direct Connect (BGP) with 
 - [AWS re:Invent 2017: Building a Solid Business Case for Cloud Migration](https://www.youtube.com/watch?v=CcspJkc7zqg)
 - [AWS re:Invent 2017: Running Lean Architectures: How to Optimize for Cost Efficiency](https://www.youtube.com/watch?v=XQFweGjK_-o)
 - [AWS re:Invent 2017: How Hess Has Continued to Optimize the AWS Cloud After Migrating](https://www.youtube.com/watch?v=1Z4BfRj2FiU)
+
+## Additional readings
+
+- [SaaS Architecture Fundamentals](https://docs.aws.amazon.com/whitepapers/latest/saas-architecture-fundamentals/saas-architecture-fundamentals.html)
