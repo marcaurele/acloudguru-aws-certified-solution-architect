@@ -11,8 +11,8 @@ Important:
 
 - read the [AWS Storage options whitepaper](https://d1.awsstatic.com/whitepapers/aws-storage-options.pdf) and note anti-patterns
   - ✔️ [Storage Best Practices for Data and Analytics Applications](https://docs.aws.amazon.com/whitepapers/latest/building-data-lakes/building-data-lake-aws.html)
-  - [SaaS Storage Strategies](https://docs.aws.amazon.com/whitepapers/latest/multi-tenant-saas-storage-strategies/multi-tenant-saas-storage-strategies.html)
-  - [Best Practices Design Patterns: Optimizing Amazon S3 Performance](https://docs.aws.amazon.com/whitepapers/latest/s3-optimizing-performance-best-practices/welcome.html?did=wp_card&trk=wp_card)
+  - ✔️ [SaaS Storage Strategies](https://docs.aws.amazon.com/whitepapers/latest/multi-tenant-saas-storage-strategies/multi-tenant-saas-storage-strategies.html)
+  - ✔️ [Best Practices Design Patterns: Optimizing Amazon S3 Performance](https://docs.aws.amazon.com/whitepapers/latest/s3-optimizing-performance-best-practices/welcome.html?did=wp_card&trk=wp_card)
 - know when to use various data stores.
 
 ### Amazon S3
@@ -24,6 +24,8 @@ Important:
 - Allow Torrent protocol, Hadoop distributed copy
 - Each S3 object can have up to 10 object tags
 - Each tag key can be up to 128 Unicode characters in length, and each tag value can be up to 256 Unicode characters in length
+- can achieve at least 3,500 `PUT/COPY/POST/DELETE` and 5,500 `GET/HEAD` requests per second per prefix in a bucket
+- no limits for the number of connections made to your bucket
 
 #### S3 Object Lambda
 
@@ -103,6 +105,11 @@ AWS Transfer Family securely scales your recurring business-to-business file tra
   - complete control over the DB: use EC2
 - Mutli-AZ for failover
 - Read replicas for performance
+- SQL Server container allows only 30 databases per instance
+- data size limits:
+  - MySQL, MariaDB, Oracle, PostgreSQL – 6 TB
+  - SQL Server – 4 TB
+  - Aurora – 64 TB
 
 ### DynamoDB
 
@@ -113,7 +120,7 @@ AWS Transfer Family securely scales your recurring business-to-business file tra
 - autoscale capacity
 - on demand capacity flexible at a small premium cost
 - can acieve ACID compliance with DynamoDB Transactions
-
+- all tables created in a region must be unique within the account
 - Primary key and sort key
 - Possible local secondary index: same partition key as the table but different sort key. When you already know the partition key but want to quiclkly query on some other attribute.
 - Possible global secondary index: partition key and sort key can be different from those on the table. For fast query when attributes fail outside of the primary key without need to do full scan
@@ -148,6 +155,12 @@ If you need to:
 - option to directly query files from s3 via redshift spectrum
 - does not support multi-AZ deployments.
 - best HA option is to use a multi-node clusters which support data replication and node recovery.
+- limits:
+  - 60 databases per cluster
+  - 256 schemas per database
+  - 500 concurrent connections per database
+  - 50 concurrent queries
+  - Access to a cluster enables access to all databases in the cluster
 
 *Redshift: name coming from moving away from Oracle datawarehouse / red logo color.*
 
