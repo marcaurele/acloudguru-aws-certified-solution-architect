@@ -221,24 +221,31 @@ Managed service where you can deploy and manage OpenSearch clusters at scale. Co
 
 - fully managed of Redis or Memcached
 - push button scalability for memory
+- important to use copnsistent hashing mechanism to not affect scaling operation with cache matches
 
 #### Memcached
 
-- simple
+- simple (stateless entities)
 - you need to scale out and in as demand changes
 - you need to run multiple CPU cores and threads
 - you need to cache objects
 
 #### Redis
 
+- advanced (stateful entities - operation require failover, cluster management...)
 - you need encryption
 - you need HIPAA compliance
 - support clustering
 - you need high-availibility
-- complex data types
+- complex data types (sort, hash, arrays, sorting...)
 - pub/sub scalability
 - geospacial indexing
 - backup and restore
+- each read replicas add cost to the syncronixation from the primary node
+- synchronization is asynchronous (readers have slighlty out of date data)
+- during failover (DNS failover), ESCache would be unavailable for a few minutes
+- can be used as a queue system (Resque)
+- hard to scale horizontally (depends on the data structures stored)
 
 ### Amazon Athena
 
@@ -257,12 +264,12 @@ Managed service where you can deploy and manage OpenSearch clusters at scale. Co
 
 ### Data models documentation
 
-- <https://d1.awsstatic.com/whitepapers/Storage/AWS%20Storage%20Services%20Whitepaper-v9.pdf>
-- <https://d1.awsstatic.com/whitepapers/Multi_Tenant_SaaS_Storage_Strategies.pdf>
-- <https://d0.awsstatic.com/whitepapers/performance-at-scale-with-amazon-elasticache.pdf>
-- [AWS re:Invent 2017: Deep dive on S3 and Glacier storage management](https://www.youtube.com/watch?v=SUWqDOnXeDw)
+- <https://d1.awsstatic.com/whitepapers/Storage/AWS%20Storage%20Services%20Whitepaper-v9.pdf> *(archived)*
+- <https://d1.awsstatic.com/whitepapers/Multi_Tenant_SaaS_Storage_Strategies.pdf> *(archived)*
+- ✔️ <https://d0.awsstatic.com/whitepapers/performance-at-scale-with-amazon-elasticache.pdf>
+- ✔️ [AWS re:Invent 2017: Deep dive on S3 and Glacier storage management](https://www.youtube.com/watch?v=SUWqDOnXeDw)
 - [AWS re:Invent 2017: ElastiCache Deep Dive: Best Practices and Usage Patterns](https://www.youtube.com/watch?v=_YYBdsuUq2M)
-- [AWS re:Invent 2017: Deep Dive: Using Hybrid Storage with AWS Storage Gateway to Solve On-Premises Storage Problems](https://www.youtube.com/watch?v=9wgaV70FeaM)
+- ✔️ [AWS re:Invent 2017: Deep Dive: Using Hybrid Storage with AWS Storage Gateway to Solve On-Premises Storage Problems](https://www.youtube.com/watch?v=9wgaV70FeaM)
 - <https://d1.awsstatic.com/whitepapers/cost-optimization-storage-optimization.pdf>
 
 ## Network
@@ -274,10 +281,10 @@ Managed service where you can deploy and manage OpenSearch clusters at scale. Co
 
 - AWS managed VPN: simple VPN connection
 - AWS Direct Connect: dedicated network connection to AWS backbone (not encrypted by default - use AWS Direct Connect Plus VPN)
-- AWS VPN CloudHub:
+- AWS VPN CloudHub: establishing a hub-and-spoke model for connecting remote branch offices through a VPN (routes are advertised to let each site communicate with each other).
 - Software VPN: provide your own VPN like OpenVPN
-- Transit VPC: connecting geographically disperse VPCs (like a hub of VPCs), also to connect external providers VPCs like Azure.
-- VPC peering: no transitive connection between multiple VPCs, need to set a route
+- Transit VPC: connecting geographically disperse VPCs (like a hub of VPCs), also to connect external providers VPCs like Azure. Can address the overlapping CIDR problem.Additional filtering can be done over the traffic.
+- VPC peering: recommended approach for connecting multiple Amazon VPCs within and across regions. No transitive connection between multiple VPCs, need to set a route.
 - AWS PrivateLink: connection between VPCs, AWS services using interface endpoints. Pro: redundant, use AWS backbones. 1 interface gateway endpoint (dynamo and S3), the other are interface endpoint. For Gateway endpoints, security is with VPC Endpoint Policies.
 - Egress-Only Internet Gateway: for IPv6 only as all addresses are public by default, this is stateful, must create a custom route `::/0`, to use instead of NAT IPv4.
 - NAT Gateway is AWS managed, versus NAT Instance which a simple EC2 instance acting as a NAT. Gateway is high available in the AZ, not the NAT Instance.
@@ -296,15 +303,15 @@ Managed service where you can deploy and manage OpenSearch clusters at scale. Co
 
 ### Network documentation
 
-- [AWS re:Invent 2016: Amazon Global Network Overview with James Hamilton](https://www.youtube.com/watch?v=uj7Ting6Ckk)
-- [Amazon Virtual Private Cloud
+- ✔️ [AWS re:Invent 2016: Amazon Global Network Overview with James Hamilton](https://www.youtube.com/watch?v=uj7Ting6Ckk)
+- ✔️ [Amazon Virtual Private Cloud
 Connectivity Options](https://d0.awsstatic.com/whitepapers/aws-amazon-vpc-connectivity-options.pdf)
 - [Integrating AWS with
-Multiprotocol Label Switching](https://d1.awsstatic.com/whitepapers/Networking/integrating-aws-with-multiprotocol-label-switching.pdf)
-- [Security in Amazon Virtual Private Cloud](https://docs.aws.amazon.com/vpc/latest/userguide/security.html)
-- [AWS re:Invent 2017: Networking Many VPCs: Transit and Shared Architectures](https://www.youtube.com/watch?v=KGKrVO9xlqI)
+Multiprotocol Label Switching](https://d1.awsstatic.com/whitepapers/Networking/integrating-aws-with-multiprotocol-label-switching.pdf) *(archived)*
+- ✔️ [Security in Amazon Virtual Private Cloud](https://docs.aws.amazon.com/vpc/latest/userguide/security.html)
+- ✔️ [AWS re:Invent 2017: Networking Many VPCs: Transit and Shared Architectures](https://www.youtube.com/watch?v=KGKrVO9xlqI)
 - [AWS re:Invent 2017: Another Day, Another Billion Flows](https://www.youtube.com/watch?v=8gc2DgBqo9U)
-- [AWS re:Invent 2017: Deep Dive into the New Network Load Balancer](https://www.youtube.com/watch?v=z0FBGIT1Ub4)
+- ✔️ [AWS re:Invent 2017: Deep Dive into the New Network Load Balancer](https://www.youtube.com/watch?v=z0FBGIT1Ub4)
 - [MLPS](https://aws.amazon.com/blogs/networking-and-content-delivery/tag/mpls/)
 
 ## Security
