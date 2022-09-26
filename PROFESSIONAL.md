@@ -115,7 +115,7 @@ AWS Transfer Family securely scales your recurring business-to-business file tra
 
 - managed, multi AZ NoSQL data store with cross region replication option
 - default to eventual consistent reads but can request strongly consistent read
-- price on throughput rather than compute
+- price on throughput rather than compute (40K read and write units)
 - provision read and write capacity in anticipation if needed
 - autoscale capacity
 - on demand capacity flexible at a small premium cost
@@ -124,6 +124,11 @@ AWS Transfer Family securely scales your recurring business-to-business file tra
 - Primary key and sort key
 - Possible local secondary index: same partition key as the table but different sort key. When you already know the partition key but want to quiclkly query on some other attribute.
 - Possible global secondary index: partition key and sort key can be different from those on the table. For fast query when attributes fail outside of the primary key without need to do full scan
+- [limits and quotas](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ServiceQuotas.html):
+  - The maximum partition key length is 2048 bytes.
+  - The maximum sort key length is 1024 bytes.
+  - The maximum item size in DynamoDB is 400 KB.
+  - The length of a String is constrained by the maximum item size of 400 KB.
 
 #### Secondary indexes
 
@@ -313,6 +318,7 @@ Multiprotocol Label Switching](https://d1.awsstatic.com/whitepapers/Networking/i
 - [AWS re:Invent 2017: Another Day, Another Billion Flows](https://www.youtube.com/watch?v=8gc2DgBqo9U)
 - ✔️ [AWS re:Invent 2017: Deep Dive into the New Network Load Balancer](https://www.youtube.com/watch?v=z0FBGIT1Ub4)
 - [MLPS](https://aws.amazon.com/blogs/networking-and-content-delivery/tag/mpls/)
+- [Building a Scalable and Secure Multi-VPC AWS Network Infrastructure](https://d1.awsstatic.com/whitepapers/building-a-scalable-and-secure-multi-vpc-aws-network-infrastructure.pdf)
 
 ## Security
 
@@ -358,6 +364,10 @@ Multiprotocol Label Switching](https://d1.awsstatic.com/whitepapers/Networking/i
 ### Amazon Macie
 
 Fully managed data security and data privacy service that uses machine learning and pattern matching to discover, monitor, and protect your sensitive data stored in your data lake. Macie can be used to scan your data lakes and discover sensitive information such as PII or financial data, and identify and report overly permissive or unencrypted buckets.
+
+### Aws Artifact
+
+AWS Artifact provides on-demand downloads of AWS security and compliance documents, such as AWS ISO certifications, Payment Card Industry (PCI), and Service Organization Control (SOC) reports. You can submit the security and compliance documents (also known as audit artifacts) to your auditors or regulators to demonstrate the security and compliance of the AWS infrastructure and services that you use. You can also use these documents as guidelines to evaluate your own cloud architecture and assess the effectiveness of your company's internal controls.
 
 ### Security documentation
 
