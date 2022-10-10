@@ -275,7 +275,7 @@ Managed service where you can deploy and manage OpenSearch clusters at scale. Co
 - ✔️ [AWS re:Invent 2017: Deep dive on S3 and Glacier storage management](https://www.youtube.com/watch?v=SUWqDOnXeDw)
 - [AWS re:Invent 2017: ElastiCache Deep Dive: Best Practices and Usage Patterns](https://www.youtube.com/watch?v=_YYBdsuUq2M)
 - ✔️ [AWS re:Invent 2017: Deep Dive: Using Hybrid Storage with AWS Storage Gateway to Solve On-Premises Storage Problems](https://www.youtube.com/watch?v=9wgaV70FeaM)
-- <https://d1.awsstatic.com/whitepapers/cost-optimization-storage-optimization.pdf>
+- <https://d1.awsstatic.com/whitepapers/cost-optimization-storage-optimization.pdf> *(archived)*
 
 ## Network
 
@@ -318,7 +318,7 @@ Multiprotocol Label Switching](https://d1.awsstatic.com/whitepapers/Networking/i
 - [AWS re:Invent 2017: Another Day, Another Billion Flows](https://www.youtube.com/watch?v=8gc2DgBqo9U)
 - ✔️ [AWS re:Invent 2017: Deep Dive into the New Network Load Balancer](https://www.youtube.com/watch?v=z0FBGIT1Ub4)
 - [MLPS](https://aws.amazon.com/blogs/networking-and-content-delivery/tag/mpls/)
-- [Building a Scalable and Secure Multi-VPC AWS Network Infrastructure](https://d1.awsstatic.com/whitepapers/building-a-scalable-and-secure-multi-vpc-aws-network-infrastructure.pdf)
+- ✔️ [Building a Scalable and Secure Multi-VPC AWS Network Infrastructure](https://d1.awsstatic.com/whitepapers/building-a-scalable-and-secure-multi-vpc-aws-network-infrastructure.pdf)
 
 ## Security
 
