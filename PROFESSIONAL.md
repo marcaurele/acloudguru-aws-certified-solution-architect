@@ -26,6 +26,7 @@ Important:
 - Each tag key can be up to 128 Unicode characters in length, and each tag value can be up to 256 Unicode characters in length
 - can achieve at least 3,500 `PUT/COPY/POST/DELETE` and 5,500 `GET/HEAD` requests per second per prefix in a bucket
 - no limits for the number of connections made to your bucket
+- encrypted buckets have a upper limit and will throttle requests due to the KMS encrypt request account limit.
 
 #### S3 Object Lambda
 
@@ -51,6 +52,16 @@ Important:
 - More expensive than S3 and EBS (of course)
 - As of December 2016, the common mount target name of an EFS file system will resolve to its local mount target in each AZ. So, you only need to create mount targets in each AZ within the same subnet as the EC2 instances then use the common FQDN.
 
+_FAQ <https://aws.amazon.com/efs/faq/>_
+
+### FSx
+
+Amazon FSx makes it easy and cost effective to launch, run, and scale feature-rich, high-performance file systems in the cloud. It supports a wide range of workloads with its reliability, security, scalability, and broad set of capabilities. Amazon FSx is built on the latest AWS compute, networking, and disk technologies to provide high performance and lower TCO. And as a fully managed service, it handles hardware provisioning, patching, and backups.
+
+FSx for NetApp, OpenZFS, Windows File Server, Lustre.
+
+_FAQ: <https://aws.amazon.com/fsx/windows/faqs/>_
+
 ### Amazon Storage Gateway
 
 - virtual machine that you run onprem with VMware or HyperV
@@ -75,9 +86,9 @@ AWS DataSync is a secure, online service that automates and accelerates moving d
 
 One is for optimized data movement, and the other is more suitable for hybrid architecture.
 
-*AWS DataSync* is ideal for online data transfers. You can use DataSync to migrate active data to AWS, transfer data to the cloud for analysis and processing, archive data to free up on-premises storage capacity, or replicate data to AWS for business continuity.
+_AWS DataSync_ is ideal for online data transfers. You can use DataSync to migrate active data to AWS, transfer data to the cloud for analysis and processing, archive data to free up on-premises storage capacity, or replicate data to AWS for business continuity.
 
-*AWS Storage Gateway* is a hybrid cloud storage service that gives you on-premises access to virtually unlimited cloud storage.
+_AWS Storage Gateway_ is a hybrid cloud storage service that gives you on-premises access to virtually unlimited cloud storage.
 
 You can combine both services. Use AWS DataSync to migrate existing data to Amazon S3, and then use the File Gateway configuration of AWS Storage Gateway to retain access to the migrated data and ongoing updates from your on-premises file-based applications.
 
@@ -111,6 +122,8 @@ AWS Transfer Family securely scales your recurring business-to-business file tra
   - SQL Server – 4 TB
   - Aurora – 64 TB
 
+Related to Oracle, the Oracle RAC can only be provisioned using EC2 instances based on FlashGrid Cloud Cluster (AMI).
+
 ### DynamoDB
 
 - managed, multi AZ NoSQL data store with cross region replication option
@@ -124,6 +137,7 @@ AWS Transfer Family securely scales your recurring business-to-business file tra
 - Primary key and sort key
 - Possible local secondary index: same partition key as the table but different sort key. When you already know the partition key but want to quiclkly query on some other attribute.
 - Possible global secondary index: partition key and sort key can be different from those on the table. For fast query when attributes fail outside of the primary key without need to do full scan
+- [expiring items by using DynamoDB TTL](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/TTL.html) (based on a specific attribute name).
 - [limits and quotas](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ServiceQuotas.html):
   - The maximum partition key length is 2048 bytes.
   - The maximum sort key length is 1024 bytes.
@@ -167,7 +181,7 @@ If you need to:
   - 50 concurrent queries
   - Access to a cluster enables access to all databases in the cluster
 
-*Redshift: name coming from moving away from Oracle datawarehouse / red logo color.*
+_Redshift: name coming from moving away from Oracle datawarehouse / red logo color._
 
 #### Amazon Redshift Spectrum
 
@@ -194,6 +208,10 @@ Fully managed serverless ETL service that makes it easier to categorize, clean, 
 AWS Glue automatically and transparently provisions hardware resources, and distributes ETL jobs on Apache Spark nodes so that ETL run times remain consistent as data volume grows.
 
 ![AWS Glue](https://docs.aws.amazon.com/whitepapers/latest/building-data-lakes/images/storage-best-practices6.png)
+
+Compatible with Python or Scala.
+
+_FAQ: <https://aws.amazon.com/glue/faqs/>_
 
 ### AWS Lake Formation
 
@@ -261,26 +279,33 @@ Managed service where you can deploy and manage OpenSearch clusters at scale. Co
 
 ### Amazon Quantum Ledger Database (QLDB)
 
+Centralized ownership
+
 - based on blockchain concepts
+- managed ledger database
+- centralized, immutable, and cryptographically verifiable transaction log
 
 ### Amazon Blockchain
+
+Decentralized ownership
 
 - Based on Ether
 
 ### Data models documentation
 
-- <https://d1.awsstatic.com/whitepapers/Storage/AWS%20Storage%20Services%20Whitepaper-v9.pdf> *(archived)*
-- <https://d1.awsstatic.com/whitepapers/Multi_Tenant_SaaS_Storage_Strategies.pdf> *(archived)*
+- <https://d1.awsstatic.com/whitepapers/Storage/AWS%20Storage%20Services%20Whitepaper-v9.pdf> _(archived)_
+- <https://d1.awsstatic.com/whitepapers/Multi_Tenant_SaaS_Storage_Strategies.pdf> _(archived)_
 - ✔️ <https://d0.awsstatic.com/whitepapers/performance-at-scale-with-amazon-elasticache.pdf>
 - ✔️ [AWS re:Invent 2017: Deep dive on S3 and Glacier storage management](https://www.youtube.com/watch?v=SUWqDOnXeDw)
 - [AWS re:Invent 2017: ElastiCache Deep Dive: Best Practices and Usage Patterns](https://www.youtube.com/watch?v=_YYBdsuUq2M)
 - ✔️ [AWS re:Invent 2017: Deep Dive: Using Hybrid Storage with AWS Storage Gateway to Solve On-Premises Storage Problems](https://www.youtube.com/watch?v=9wgaV70FeaM)
-- <https://d1.awsstatic.com/whitepapers/cost-optimization-storage-optimization.pdf> *(archived)*
+- <https://d1.awsstatic.com/whitepapers/cost-optimization-storage-optimization.pdf> _(archived)_
 
 ## Network
 
 - 5 addresses are not usable in each range (0=NetAddress,1=AWS-VPC-router,2=AWS-DNS,3=AWS-Future-Use,255=Broadcast=Reserved-as-not-usable).
 - VPCs support IPv4 netmask range from /16 to /28.
+- VPCs can have public addresses but still require a NAT for the outbound traffic.
 
 ### Services
 
@@ -305,6 +330,21 @@ Managed service where you can deploy and manage OpenSearch clusters at scale. Co
 ### Route53
 
 - policies: simple, failover, geolocation, geoproximity, latency, multi-answers, weighted.
+- [How Health Checks Work in Complex Amazon Route 53 Configurations - Amazon Route 53](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-complex-configs.html)
+
+### CloudFront
+
+| |cloudFront functions | Lambda@Edge
+--- | --- | ---
+Programming languages | JavaScript (ECMAScript 5.1 compliant) | Node.js and Python
+Event sources | Viewer request,  Viewer response | Viewer request, Viewer response, Origin request, Origin response
+Scale | 10,000,000 requests per second or more | Up to 10,000 requests per second per Region
+Function duration |Submillisecond | Up to 5 seconds (viewer request and viewer response), Up to 30 seconds (origin request and origin response)
+Maximum memory | 2 MB | 128 – 3,008 MB
+Network access | No | Yes
+Access to the request body | No | Yes
+
+_<https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/edge-functions.html>_
 
 ### Network documentation
 
@@ -312,7 +352,7 @@ Managed service where you can deploy and manage OpenSearch clusters at scale. Co
 - ✔️ [Amazon Virtual Private Cloud
 Connectivity Options](https://d0.awsstatic.com/whitepapers/aws-amazon-vpc-connectivity-options.pdf)
 - [Integrating AWS with
-Multiprotocol Label Switching](https://d1.awsstatic.com/whitepapers/Networking/integrating-aws-with-multiprotocol-label-switching.pdf) *(archived)*
+Multiprotocol Label Switching](https://d1.awsstatic.com/whitepapers/Networking/integrating-aws-with-multiprotocol-label-switching.pdf) _(archived)_
 - ✔️ [Security in Amazon Virtual Private Cloud](https://docs.aws.amazon.com/vpc/latest/userguide/security.html)
 - ✔️ [AWS re:Invent 2017: Networking Many VPCs: Transit and Shared Architectures](https://www.youtube.com/watch?v=KGKrVO9xlqI)
 - [AWS re:Invent 2017: Another Day, Another Billion Flows](https://www.youtube.com/watch?v=8gc2DgBqo9U)
@@ -350,7 +390,7 @@ Multiprotocol Label Switching](https://d1.awsstatic.com/whitepapers/Networking/i
 - based on CloudFormation templates
 - administrators can version and remove products. Existing running product versions will not be shutdown.
 - use constraints:
-  - Launch constraint
+  - [Launch constraint](https://docs.aws.amazon.com/servicecatalog/latest/adminguide/constraints-launch.html)
     - what: IAM role that Service Catalog assumes when an end-user launches a product.
     - why: without a launch constraint, the end-user must have all permissions needed within their own IAM credentials.
   - Notification Constraint:
@@ -360,6 +400,8 @@ Multiprotocol Label Switching](https://d1.awsstatic.com/whitepapers/Networking/i
     - what: one or more rules that narrow allowable values an end-user can select.
     - why: adjust product attributes based on choices a user makes (ex: only allow certain instances types for DEV environment).
 - can be shared through multi-account with the templates within the master. Auto cascading of changes to sub accounts. Must rewrite launch stack to target the sub-account otherwise it will try in the main one (owner of the template)
+
+_FAQ: <https://aws.amazon.com/servicecatalog/faqs/>_
 
 ### Amazon Macie
 
@@ -463,6 +505,63 @@ Start with VPN connection from on-prem. Later move to Direct Connect (BGP) with 
 - visual interface describes flow and realtime status.
 - detailed logs of each step execution.
 
+### AWS IoT
+
+- **Analytics** service is useful for understanding long-term device performance, performing business reporting, and identifying predictive fleet maintenance needs, but common latencies run from seconds to minutes. If you need to analyze IoT data in real-time for device monitoring, use Kinesis Data Analytics, which provides latencies in the millisecond to seconds range. See [Processing IoT Time Series Data on AWS AWS IoT Analytics FAQs](https://d1.awsstatic.com/architecture-diagrams/ArchitectureDiagrams/aws-reference-architecture-time-series-processing.pdf?did=wp_card&trk=wp_card), [Introducing Real-Time IoT Device Monitoring with Kinesis Data Analytics](https://aws.amazon.com/about-aws/whats-new/2018/05/introducing-real-time-iot-device-monitoring-with-kinesis-data-analytics/).
+
+### AWS Well Architected Framework
+
+#### Operational Excellence Pillar
+
+- **Perform operations as code**: In the cloud, you can apply the same engineering discipline that you use for application code to your entire environment. You can define your entire workload (applications, infrastructure, etc.) as code and update it with code. You can script your operations procedures and automate their execution by triggering them in response to events. By performing operations as code, you limit human error and enable consistent responses to events.
+- **Make frequent, small, reversible changes**: Design workloads to allow components to be updated regularly to increase the flow of beneficial changes into your workload. Make changes in small increments that can be reversed if they fail to aid in the identification and resolution of issues introduced to your environment (without affecting customers when possible).
+- **Refine operations procedures frequently**: As you use operations procedures, look for opportunities to improve them. As you evolve your workload, evolve your procedures appropriately. Set up regular game days to review and validate that all procedures are effective and that teams are familiar with them.
+- **Anticipate failure**: Perform “pre-mortem” exercises to identify potential sources of failure so that they can be removed or mitigated. Test your failure scenarios and validate your understanding of their impact. Test your response procedures to ensure they are effective and that teams are familiar with their execution. Set up regular game days to test workload and team responses to simulated events.
+- **Learn from all operational failures**: Drive improvement through lessons learned from all operational events and failures. Share what is learned across teams and through the entire organization.
+
+#### Security Pillar
+
+- **Implement a strong identity foundation**: Implement the principle of least privilege and enforce separation of duties with appropriate authorization for each interaction with your AWS resources. Centralize identity management, and aim to eliminate reliance on long-term static credentials.
+- **Enable traceability**: Monitor, alert, and audit actions and changes to your environment in real time. Integrate log and metric collection with systems to automatically investigate and take action.
+- **Apply security at all layers**: Apply a defense in depth approach with multiple security controls. Apply to all layers (for example, edge of network, VPC, load balancing, every instance and compute service, operating system, application, and code).
+- **Automate security best practices**: Automated software-based security mechanisms improve your ability to securely scale more rapidly and cost-effectively. Create secure architectures, including the implementation of controls that are defined and managed as code in version-controlled templates.
+- **Protect data in transit and at rest**: Classify your data into sensitivity levels and use mechanisms, such as encryption, tokenization, and access control where appropriate.
+- **Keep people away from data**: Use mechanisms and tools to reduce or eliminate the need for direct access or manual processing of data. This reduces the risk of mishandling or modification and human error when handling sensitive data.
+- **Prepare for security events**: Prepare for an incident by having incident management and investigation policy and processes that align to your organizational requirements. Run incident response simulations and use tools with automation to increase your speed for detection, investigation, and recovery.
+
+#### Reliability Pillar
+
+- **Automatically recover from failure**: By monitoring a workload for key performance indicators (KPIs), you can trigger automation when a threshold is breached. These KPIs should be a measure of business value, not of the technical aspects of the operation of the service. This allows for automatic notification and tracking of failures, and for automated recovery processes that work around or repair the failure. With more sophisticated automation, it’s possible to anticipate and remediate failures before they occur.
+- **Test recovery procedures**: In an on-premises environment, testing is often conducted to prove that the workload works in a particular scenario. Testing is not typically used to validate recovery strategies. In the cloud, you can test how your workload fails, and you can validate your recovery procedures. You can use automation to simulate different failures or to recreate scenarios that led to failures before. This approach exposes failure pathways that you can test and fix before a real failure scenario occurs, thus reducing risk.
+- **Scale horizontally to increase aggregate workload availability**: Replace one large resource with multiple small resources to reduce the impact of a single failure on the overall workload. Distribute requests across multiple, smaller resources to ensure that they don’t share a common point of failure.
+- **Stop guessing capacity**: A common cause of failure in on-premises workloads is resource saturation, when the demands placed on a workload exceed the capacity of that workload (this is often the objective of denial of service attacks). In the cloud, you can monitor demand and workload utilization, and automate the addition or removal of resources to maintain the optimal level to satisfy demand without over- or under-provisioning. There are still limits, but some quotas can be controlled and others can be managed (see [Manage Service Quotas and Constraints](https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/manage-service-quotas-and-constraints.html)).
+- **Manage change in automation**: Changes to your infrastructure should be made using automation. The changes that need to be managed include changes to the automation, which then can be tracked and reviewed.
+
+#### Performance Efficiency Pillar
+
+- **Democratize advanced technologies**: Make advanced technology implementation easier for your team by delegating complex tasks to your cloud vendor. Rather than asking your IT team to learn about hosting and running a new technology, consider consuming the technology as a service. For example, NoSQL databases, media transcoding, and machine learning are all technologies that require specialized expertise. In the cloud, these technologies become services that your team can consume, allowing your team to focus on product development rather than resource provisioning and management.
+- **Go global in minutes**: Deploying your workload in multiple AWS Regions around the world allows you to provide lower latency and a better experience for your customers at minimal cost.
+- **Use serverless architectures**: Serverless architectures remove the need for you to run and maintain physical servers for traditional compute activities. For example, serverless storage services can act as static websites (removing the need for web servers) and event services can host code. This removes the operational burden of managing physical servers, and can lower transactional costs because managed services operate at cloud scale.
+- **Experiment more often**: With virtual and automatable resources, you can quickly carry out comparative testing using different types of instances, storage, or configurations.
+- **Consider mechanical sympathy**: Use the technology approach that aligns best with your goals. For example, consider data access patterns when you select database or storage approaches.
+
+#### Cost Optimization Pillar
+
+- **Implement cloud financial management**: To achieve financial success and accelerate business value realization in the cloud, you must invest in Cloud Financial Management. Your organization must dedicate the necessary time and resources for building capability in this new domain of technology and usage management. Similar to your Security or Operations capability, you need to build capability through knowledge building, programs, resources, and processes to help you become a cost efficient organization.
+- **Adopt a consumption model**: Pay only for the computing resources you consume, and increase or decrease usage depending on business requirements. For example, development and test environments are typically only used for eight hours a day during the work week. You can stop these resources when they’re not in use for a potential cost savings of 75% (40 hours versus 168 hours).
+- **Measure overall efficiency**: Measure the business output of the workload and the costs associated with delivery. Use this data to understand the gains you make from increasing output, increasing functionality, and reducing cost.
+- **Stop spending money on undifferentiated heavy lifting**: AWS does the heavy lifting of data center operations like racking, stacking, and powering servers. It also removes the operational burden of managing operating systems and applications with managed services. This allows you to focus on your customers and business projects rather than on IT infrastructure.
+- **Analyze and attribute expenditure**: The cloud makes it easier to accurately identify the cost and usage of workloads, which then allows transparent attribution of IT costs to revenue streams and individual workload owners. This helps measure return on investment (ROI) and gives workload owners an opportunity to optimize their resources and reduce costs.
+
+#### Sustainability Pillar
+
+- **Understand your impact**: Measure the impact of your cloud workload and model the future impact of your workload. Include all sources of impact, including impacts resulting from customer use of your products, and impacts resulting from their eventual decommissioning and retirement. Compare the productive output with the total impact of your cloud workloads by reviewing the resources and emissions required per unit of work. Use this data to establish key performance indicators (KPIs), evaluate ways to improve productivity while reducing impact, and estimate the impact of proposed changes over time.
+- **Establish sustainability goals**: For each cloud workload, establish long-term sustainability goals such as reducing the compute and storage resources required per transaction. Model the return on investment of sustainability improvements for existing workloads, and give owners the resources they need to invest in sustainability goals. Plan for growth, and architect your workloads so that growth results in reduced impact intensity measured against an appropriate unit, such as per user or per transaction. Goals help you support the wider sustainability goals of your business or organization, identify regressions, and prioritize areas of potential improvement.
+- **Maximize utilization**: Right-size workloads and implement efficient design to ensure high utilization and maximize the energy efficiency of the underlying hardware. Two hosts running at 30% utilization are less efficient than one host running at 60% due to baseline power consumption per host. At the same time, eliminate or minimize idle resources, processing, and storage to reduce the total energy required to power your workload.
+- **Anticipate and adopt new, more efficient hardware and software offerings**: Support the upstream improvements your partners and suppliers make to help you reduce the impact of your cloud workloads. Continually monitor and evaluate new, more efficient hardware and software offerings. Design for flexibility to allow for the rapid adoption of new efficient technologies.
+- **Use managed services**: Sharing services across a broad customer base helps maximize resource utilization, which reduces the amount of infrastructure needed to support cloud workloads. For example, customers can share the impact of common data center components like power and networking by migrating workloads to the AWS Cloud and adopting managed services, such as AWS Fargate for serverless containers, where AWS operates at scale and is responsible for their efficient operation. Use managed services that can help minimize your impact, such as automatically moving infrequently accessed data to cold storage with Amazon S3 Lifecycle configurations or Amazon EC2 Auto Scaling to adjust capacity to meet demand.
+- **Reduce the downstream impact of your cloud workloads**: Reduce the amount of energy or resources required to use your services. Reduce or eliminate the need for customers to upgrade their devices to use your services. Test using device farms to understand expected impact and test with customers to understand the actual impact from using your services.
+
 ### Architecting to scale Documentation
 
 - [Web Application Hosting in the AWS Cloud](https://d1.awsstatic.com/whitepapers/aws-web-hosting-best-practices.pdf)
@@ -517,12 +616,21 @@ Start with VPN connection from on-prem. Later move to Direct Connect (BGP) with 
 - Allow you to assess, audit and evaluate configurations of your AWS resources.
 - Very useful for Configuration Management as part of an ITIL program.
 - Creates a baseline of various configuration settings and files then can track drift.
-- Can check resources for certain desired conditions and if violations are found, the resource is flagged as *noncompliant*.
+- Can check resources for certain desired conditions and if violations are found, the resource is flagged as _noncompliant_.
 
 ### AWS OpsWorks
 
 - managed instance of Chef and Puppet.
 - OpsWorks Stack is Chef single agent, requires Stack in each region as it can only control resources in that same region.
+- offers 3 types of scaling: 24/7 for instances that remain on all the time; time-based for instances that can be scheduled for a certain time of day and on certain days of the week; and load-based scaling which will add instances based on metrics.
+
+### AWS CodeBuild
+
+AWS CodeBuild is a fully managed continuous integration service that compiles source code, runs tests, and produces software packages that are ready to deploy.
+
+### AWS Lightsail
+
+Build applications and websites fast with low-cost, pre-configured cloud resources. Amazon Lightsail offers easy-to-use virtual private server (VPS) instances, containers, storage, databases, and more at a cost-effective monthly price.
 
 ### AWS System Manager
 
@@ -534,24 +642,25 @@ Start with VPN connection from on-prem. Later move to Direct Connect (BGP) with 
 - maintenance-window: define schedule for instances patch, update apps...
 - automation:automating routine maintenance tasks and scripts
 - run-command: run commands and scripts without loggin in via SHH/RDP
-- patch-manager: automates process of patching
+- patch-manager: automates process of patching. The default predefined patch baseline for Windows servers in Patch Manager is `AWS-DefaultPatchBaseline` (or `AWS-WindowsPredefinedPatchBaseline-OS`), or for OS + applications use `AWS-WindowsPredefinedPatchBaseline-OS-Applications`.
 
 ### Business Applications and End-USer Computing
 
-- Amazon Workspaces: remote desktop (full desktop)
-- Amazon AppStream: show only a hosted application (application hosting)
-- AWS Connect: center solution with configurable call
-- Amazon Chime: online meeting and video conferencing service
-- Amazon WorkDocs: like GDrive
-- Amazon WorkEmail: fully managed email service
-- Amazon WorkLink: provide secure access to internal web applications for mobile devices
-- Alexa for Businnes: Alexa functionnality and skills for internal in your enterprise
+- Amazon Workspaces: remote desktop (full desktop).
+- Amazon AppStream: show only a hosted application (application hosting).
+- AWS Connect: center solution with configurable call.
+- Amazon Chime: online meeting and video conferencing service.
+- Amazon WorkDocs: like GDrive.
+- Amazon WorkEmail: fully managed email service.
+- Amazon WorkLink: provide secure access to internal web applications for mobile devices.
+- Alexa for Businnes: Alexa functionnality and skills for internal in your enterprise.
 
 ### AWS Machine Learning
 
 - SageMaker: machine learning service managed by AWS (build, train and deploy models)
-- Amazon Comprehend: NLP
-- Amazon Polly: test tp speech in many languages
+- Amazon Comprehend: Derive and understand valuable insights from text within documents. Amazon Comprehend is a natural-language processing (NLP) service that uses machine learning to uncover valuable insights and connections in text.
+- Amazon Lex: Build chatbots with conversational AI. Amazon Lex is a fully managed artificial intelligence (AI) service with advanced natural language models to design, build, test, and deploy conversational interfaces in applications.
+- Amazon Polly: text to speech in many languages. Deploy high-quality, natural-sounding human voices in dozens of languages.
 
 ### Deployment and Operations management Documentation
 
@@ -565,7 +674,16 @@ Start with VPN connection from on-prem. Later move to Direct Connect (BGP) with 
 
 ## Cost Management
 
-- [Cost Optimization Pillar](https://d1.awsstatic.com/whitepapers/architecture/AWS-Cost-Optimization-Pillar.pdf)
+Your company has been running its core application on a fleet of r4.xlarge EC2 instances for a year. You are confident that the application has a steady-state performance and now you have been asked to purchase Reserved Instances (RIs) for a further 2 years to cover the existing EC2 instances, with the option of moving to other Memory or Compute optimised instance families when they are introduced. You also need to have the option of moving Regions in the future. Which of the following options meet the above criteria whilst offering the greatest flexibility and maintaining the best value for money:
+
+- YES: Purchase a 1 year Convertible RI for each EC2 instance, for 2 consecutive years running
+- NO: Purchase a Convertible RI for 3 years, then sell the unused RI on the Reserved Instance Marketplace
+- NO: Purchase a 1 year Standard Zonal RI for 3 years, then sell the unused RI on the Reserved Instance Marketplace
+- NO: Purchase a Scheduled RI for 3 years, then sell the unused RI on the Reserved Instance Marketplace
+
+When answering this question, it's important to exclude those options which are not relevant, first. The question states that the RI should allow for moving between instance families and this immediately rules out Standard and Scheduled RIs as only Convertible RIs can do this. Of the 2 Convertible RI options, on can be ruled out as it suggests selling unused RI capacity on the Reserved Instance Marketplace, but this is not available for Convertible RIs and therefore that only leaves one answer as being correct. [Types of Reserved Instances (Offering Classes)](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/reserved-instances-types.html) - [Amazon Elastic Compute Cloud Scheduled Reserved Instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-scheduled-instances.html) - [Amazon Elastic Compute Cloud](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-scheduled-instances.html)
+
+- [Cost Optimization Pillar](https://docs.aws.amazon.com/wellarchitected/latest/cost-optimization-pillar/welcome.html)
 - [Maximizing Value with AWS](https://d1.awsstatic.com/whitepapers/total-cost-of-operation-benefits-using-aws.pdf)
 - [Introduction to AWS Economics](https://d1.awsstatic.com/whitepapers/introduction-to-aws-cloud-economics-final.pdf)
 - [AWS re:Invent 2017: Building a Solid Business Case for Cloud Migration](https://www.youtube.com/watch?v=CcspJkc7zqg)
