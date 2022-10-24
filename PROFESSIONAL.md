@@ -245,7 +245,7 @@ Managed service where you can deploy and manage OpenSearch clusters at scale. Co
 
 - fully managed of Redis or Memcached
 - push button scalability for memory
-- important to use copnsistent hashing mechanism to not affect scaling operation with cache matches
+- important to use consistent hashing mechanism to not affect scaling operation with cache matches
 
 #### Memcached
 
