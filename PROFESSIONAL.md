@@ -110,7 +110,8 @@ AWS Transfer Family securely scales your recurring business-to-business file tra
   - PostgreSQL,
   - Microsoft SQL,
   - Oracle,
-  - MySQL-compatible Aurora
+  - Aurora with MySQL compatibility,
+  - Aurora with Postgresql compatibility.
 - Anti-patterns:
   - automated scaling: use DynamoDB (if possible)
   - complete control over the DB: use EC2
@@ -132,10 +133,10 @@ Related to Oracle, the Oracle RAC can only be provisioned using EC2 instances ba
 - provision read and write capacity in anticipation if needed
 - autoscale capacity
 - on demand capacity flexible at a small premium cost
-- can acieve ACID compliance with DynamoDB Transactions
+- can achieve ACID compliance with DynamoDB Transactions
 - all tables created in a region must be unique within the account
 - Primary key and sort key
-- Possible local secondary index: same partition key as the table but different sort key. When you already know the partition key but want to quiclkly query on some other attribute.
+- Possible local secondary index: same partition key as the table but different sort key. When you already know the partition key but want to quickly query on some other attribute.
 - Possible global secondary index: partition key and sort key can be different from those on the table. For fast query when attributes fail outside of the primary key without need to do full scan
 - [expiring items by using DynamoDB TTL](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/TTL.html) (based on a specific attribute name).
 - [limits and quotas](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ServiceQuotas.html):
@@ -149,7 +150,7 @@ Related to Oracle, the Oracle RAC can only be provisioned using EC2 instances ba
 If you need to:
 
 - access just a few attributes the fastest way possible:
-  - consider projecting those few attibutes in a global secondary index
+  - consider projecting those few attributes in a global secondary index
   - cost: minimal
   - benefit: lowest possible latency access for non-key items
 - frequently access some non-key attributes:
