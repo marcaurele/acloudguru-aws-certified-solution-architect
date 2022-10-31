@@ -5,7 +5,7 @@
 ## Data models
 
 - ACID: Atomic, Consistency, Isolated, Durable - like databases
-- BASE: Basic Availibility, Soft-state, Eventual Consistency - like SNS/SQS, S3
+- BASE: Basic Availability, Soft-state, Eventual Consistency - like SNS/SQS, S3
 
 Important:
 
@@ -36,7 +36,7 @@ Important:
 
 ### Amazon Galcier
 
-- max filesize is 40TB
+- max file size is 40TB
 - Glacier Vault lock to avoid archive to be changed / modified
 
 ### EBS
@@ -64,13 +64,13 @@ _FAQ: <https://aws.amazon.com/fsx/windows/faqs/>_
 
 ### Amazon Storage Gateway
 
-- virtual machine that you run onprem with VMware or HyperV
+- virtual machine that you run on-prem with VMware or HyperV
 - provides local storage resources backed by Glacier and S3
 - use in cloud migration or disaster recovery
 - different modes:
   - file gateway (optional cache mode): S3 bucket seen as NFS share for on-prem
-  - volume gateway (optional cache mode): async replication to s3 with ISCI
-  - tape gateway: virtual tape device for backups (ISCI VTL)
+  - volume gateway (optional cache mode): async replication to s3 with iSCI
+  - tape gateway: virtual tape device for backups (iSCI VTL)
 
 Files written to this mount point are converted to objects stored in Amazon S3 in their original format without any proprietary modification. This means that you can integrate applications and platforms that don’t have native Amazon S3 capabilities.
 
@@ -115,7 +115,7 @@ AWS Transfer Family securely scales your recurring business-to-business file tra
 - Anti-patterns:
   - automated scaling: use DynamoDB (if possible)
   - complete control over the DB: use EC2
-- Mutli-AZ for failover
+- Multi-AZ for failover
 - Read replicas for performance
 - SQL Server container allows only 30 databases per instance
 - data size limits:
@@ -131,7 +131,7 @@ Related to Oracle, the Oracle RAC can only be provisioned using EC2 instances ba
 - default to eventual consistent reads but can request strongly consistent read
 - price on throughput rather than compute (40K read and write units)
 - provision read and write capacity in anticipation if needed
-- autoscale capacity
+- auto scale capacity
 - on demand capacity flexible at a small premium cost
 - can achieve ACID compliance with DynamoDB Transactions
 - all tables created in a region must be unique within the account
@@ -155,7 +155,7 @@ If you need to:
   - benefit: lowest possible latency access for non-key items
 - frequently access some non-key attributes:
   - consider projecting those attributes in a global secondary index
-  - cost: moderateL aim to offset cost of table scans
+  - cost: moderate, aim to offset cost of table scans
   - benefit: lowest possible latency access for non-key items
 - frequently access most non-key attributes:
   - consider projecting those attributes or even the entire table in a global secondary index
@@ -168,8 +168,8 @@ If you need to:
 
 ### Amazon Redshift
 
-- fully mamaged, cluster to petabyte
-- extremely cost effective as compared to some other on-prem datawarehouse
+- fully managed, cluster to petabyte
+- extremely cost effective as compared to some other on-prem data warehouse
 - postgresql compatible with JDBC and ODBC drivers
 - parallel processing and columnar data stores
 - option to directly query files from s3 via redshift spectrum
@@ -182,7 +182,7 @@ If you need to:
   - 50 concurrent queries
   - Access to a cluster enables access to all databases in the cluster
 
-_Redshift: name coming from moving away from Oracle datawarehouse / red logo color._
+_Redshift: name coming from moving away from Oracle data warehouse / red logo color._
 
 #### Amazon Redshift Spectrum
 
@@ -260,13 +260,13 @@ Managed service where you can deploy and manage OpenSearch clusters at scale. Co
 - you need encryption
 - you need HIPAA compliance
 - support clustering
-- you need high-availibility
+- you need high-availability
 - complex data types (sort, hash, arrays, sorting...)
 - pub/sub scalability
-- geospacial indexing
+- geospatial indexing
 - backup and restore
-- each read replicas add cost to the syncronixation from the primary node
-- synchronization is asynchronous (readers have slighlty out of date data)
+- each read replicas add cost to the synchronization from the primary node
+- synchronization is asynchronous (readers have slightly out of date data)
 - during failover (DNS failover), ESCache would be unavailable for a few minutes
 - can be used as a queue system (Resque)
 - hard to scale horizontally (depends on the data structures stored)
@@ -340,7 +340,7 @@ Decentralized ownership
 Programming languages | JavaScript (ECMAScript 5.1 compliant) | Node.js and Python
 Event sources | Viewer request,  Viewer response | Viewer request, Viewer response, Origin request, Origin response
 Scale | 10,000,000 requests per second or more | Up to 10,000 requests per second per Region
-Function duration |Submillisecond | Up to 5 seconds (viewer request and viewer response), Up to 30 seconds (origin request and origin response)
+Function duration | Sub-millisecond | Up to 5 seconds (viewer request and viewer response), Up to 30 seconds (origin request and origin response)
 Maximum memory | 2 MB | 128 – 3,008 MB
 Network access | No | Yes
 Access to the request body | No | Yes
@@ -353,7 +353,7 @@ _<https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/edge-functi
 - ✔️ [Amazon Virtual Private Cloud
 Connectivity Options](https://d0.awsstatic.com/whitepapers/aws-amazon-vpc-connectivity-options.pdf)
 - [Integrating AWS with
-Multiprotocol Label Switching](https://d1.awsstatic.com/whitepapers/Networking/integrating-aws-with-multiprotocol-label-switching.pdf) _(archived)_
+Multi-protocol Label Switching](https://d1.awsstatic.com/whitepapers/Networking/integrating-aws-with-multiprotocol-label-switching.pdf) _(archived)_
 - ✔️ [Security in Amazon Virtual Private Cloud](https://docs.aws.amazon.com/vpc/latest/userguide/security.html)
 - ✔️ [AWS re:Invent 2017: Networking Many VPCs: Transit and Shared Architectures](https://www.youtube.com/watch?v=KGKrVO9xlqI)
 - [AWS re:Invent 2017: Another Day, Another Billion Flows](https://www.youtube.com/watch?v=8gc2DgBqo9U)
@@ -369,9 +369,9 @@ Multiprotocol Label Switching](https://d1.awsstatic.com/whitepapers/Networking/i
 
 ### AWS Directory Services
 
-- AWS Cloud Directory: cloud-native directory to share and control access to hierachical data between applications
+- AWS Cloud Directory: cloud-native directory to share and control access to hierarchical data between applications
 - Amazon Cognito: Sign-up and Sign-in functionality that scales and federated to public social media services
-- AWS Directory Service for MS AD: AWS-managed full Microsft AD
+- AWS Directory Service for MS AD: AWS-managed full Microsoft AD
 - AD Connector: Allow on-prem users to log in into AWS using existing AD credentials. Allow also EC2 to join AD domain. Can used IAM roles. Support Radius MFA.
 - Simple AD: low scale, low cost AD implementation based on Samba (simple user directory with LDAP compatibility). MFA not supported. Kerberos based SSO. Does not support trust relationship with other domains.
 
@@ -384,8 +384,8 @@ Multiprotocol Label Switching](https://d1.awsstatic.com/whitepapers/Networking/i
 
 ### AWS Service Catalog
 
-- framework allowing administrators to create pre-definied products and landscapes for their users.
-- granular control over which users have access to hwhich offerings
+- framework allowing administrators to create pre-defined products and landscapes for their users.
+- granular control over which users have access to which offerings
 - makes use of adopted IAM roles so users don't need underlying service access
 - allow end users to be self-sufficient while upholding enterprise standards for deployments
 - based on CloudFormation templates
@@ -396,7 +396,7 @@ Multiprotocol Label Switching](https://d1.awsstatic.com/whitepapers/Networking/i
     - why: without a launch constraint, the end-user must have all permissions needed within their own IAM credentials.
   - Notification Constraint:
     - what: specifies the Amazon SNS topic to receive notifications about stack events.
-    - why: can get notifications when products are maunched or have problems.
+    - why: can get notifications when products are launched or have problems.
   - Template Constraint:
     - what: one or more rules that narrow allowable values an end-user can select.
     - why: adjust product attributes based on choices a user makes (ex: only allow certain instances types for DEV environment).
@@ -441,11 +441,11 @@ AWS Artifact provides on-demand downloads of AWS security and compliance documen
 
 - Server migration: agent for Vmware or HyperV to clone and periodically sync AMI changes to move or backup/recovery image on the cloud.
 - Database migration service: can use a data conversion tool to help migrating to cloud DB (Redshift, RDS, Dynamodb)
-- Application Discovery Service: collects config, usage and bhavior data from on prem servers to help estimate TCO of running on AWS. Gather information about on-prem data centers (inventory).
+- Application Discovery Service: collects config, usage and behavior data from on prem servers to help estimate TCO of running on AWS. Gather information about on-prem data centers (inventory).
 
 ### Network migrations and cutovers
 
-Start with VPN connection from on-prem. Later move to Direct Connect (BGP) with VPN as backup, requires to setup BGP preferences to use the Direct Connect link instead of the VPN (while having the same BGP prefix for both). On AWS Direct Conenct is always the preferred route.
+Start with VPN connection from on-prem. Later move to Direct Connect (BGP) with VPN as backup, requires to setup BGP preferences to use the Direct Connect link instead of the VPN (while having the same BGP prefix for both). On AWS Direct Connect is always the preferred route.
 
 ### Migration documentation
 
@@ -470,7 +470,7 @@ Start with VPN connection from on-prem. Later move to Direct Connect (BGP) with 
 ### Kinesis
 
 - collection of services for processing streams of various data.
-- data is processed in "shards" - with each shart able to ingest 1000 records per second.
+- data is processed in "shards" - with each shard able to ingest 1000 records per second.
 - a default limit of 500 shards, but can be increase to unlimited
 - record consists of partition key, sequence number and data blob (up to 1MB)
 - transient data store - default retention of 24 hours, but can be configured for up to 7 days.
@@ -500,7 +500,7 @@ Start with VPN connection from on-prem. Later move to Direct Connect (BGP) with 
 
 - managed workflow and orchestration platform.
 - define your app as a state machine.
-- create tasks, sequential steps, paralelle steps, branching paths or timers.
+- create tasks, sequential steps, parallel steps, branching paths or timers.
 - amazon state language declarative JSON.
 - apps can interact and update the stream via Step Function API.
 - visual interface describes flow and realtime status.
@@ -573,7 +573,7 @@ Start with VPN connection from on-prem. Later move to Direct Connect (BGP) with 
 - [AWS re:Invent 2017: Learn to Build a Cloud-Scale WordPress Site That Can Keep Up](https://www.youtube.com/watch?v=dPdac4LL884)
 - [AWS re:Invent 2017: Elastic Load Balancing Deep Dive and Best Practices](https://www.youtube.com/watch?v=9TwkMMogojY)
 - [AWS Well-Architected Framework](https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html)
-- [Implementing Microservices on AWS](https://docs.aws.amazon.com/whitepapers/latest/microservices-on-aws/microservices-on-aws.pdf)
+- [Implementing Micro-services on AWS](https://docs.aws.amazon.com/whitepapers/latest/microservices-on-aws/microservices-on-aws.pdf)
 
 ## Business Continuity
 
@@ -642,7 +642,7 @@ Build applications and websites fast with low-cost, pre-configured cloud resourc
 - resource-groups: group resource through tagging for organization
 - maintenance-window: define schedule for instances patch, update apps...
 - automation:automating routine maintenance tasks and scripts
-- run-command: run commands and scripts without loggin in via SHH/RDP
+- run-command: run commands and scripts without log in via SHH/RDP
 - patch-manager: automates process of patching. The default predefined patch baseline for Windows servers in Patch Manager is `AWS-DefaultPatchBaseline` (or `AWS-WindowsPredefinedPatchBaseline-OS`), or for OS + applications use `AWS-WindowsPredefinedPatchBaseline-OS-Applications`.
 
 ### Business Applications and End-USer Computing
@@ -654,7 +654,7 @@ Build applications and websites fast with low-cost, pre-configured cloud resourc
 - Amazon WorkDocs: like GDrive.
 - Amazon WorkEmail: fully managed email service.
 - Amazon WorkLink: provide secure access to internal web applications for mobile devices.
-- Alexa for Businnes: Alexa functionnality and skills for internal in your enterprise.
+- Alexa for Business: Alexa functionality and skills for internal in your enterprise.
 
 ### AWS Machine Learning
 
@@ -675,7 +675,7 @@ Build applications and websites fast with low-cost, pre-configured cloud resourc
 
 ## Cost Management
 
-Your company has been running its core application on a fleet of r4.xlarge EC2 instances for a year. You are confident that the application has a steady-state performance and now you have been asked to purchase Reserved Instances (RIs) for a further 2 years to cover the existing EC2 instances, with the option of moving to other Memory or Compute optimised instance families when they are introduced. You also need to have the option of moving Regions in the future. Which of the following options meet the above criteria whilst offering the greatest flexibility and maintaining the best value for money:
+Your company has been running its core application on a fleet of r4.xlarge EC2 instances for a year. You are confident that the application has a steady-state performance and now you have been asked to purchase Reserved Instances (RIs) for a further 2 years to cover the existing EC2 instances, with the option of moving to other Memory or Compute optimized instance families when they are introduced. You also need to have the option of moving Regions in the future. Which of the following options meet the above criteria whilst offering the greatest flexibility and maintaining the best value for money:
 
 - YES: Purchase a 1 year Convertible RI for each EC2 instance, for 2 consecutive years running
 - NO: Purchase a Convertible RI for 3 years, then sell the unused RI on the Reserved Instance Marketplace
