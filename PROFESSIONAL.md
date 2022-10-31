@@ -304,29 +304,36 @@ Decentralized ownership
 
 ## Network
 
-- 5 addresses are not usable in each range (0=NetAddress,1=AWS-VPC-router,2=AWS-DNS,3=AWS-Future-Use,255=Broadcast=Reserved-as-not-usable).
+- 5 addresses are not usable in each range, example for a /24:
+  - 0=NetAddress,
+  - 1=AWS-VPC-router,
+  - 2=AWS-DNS,
+  - 3=AWS-Future-Use,
+  - 255=Broadcast=Reserved-as-not-usable.
 - VPCs support IPv4 netmask range from /16 to /28.
 - VPCs can have public addresses but still require a NAT for the outbound traffic.
 
 ### Services
 
-- AWS managed VPN: simple VPN connection
+- AWS managed VPN: simple VPN connection, either client based, or for site-to-site. Site-to-site can be used in combination of Global Accelerator to route traffic to the closest AWS edge location.
 - AWS Direct Connect: dedicated network connection to AWS backbone (not encrypted by default - use AWS Direct Connect Plus VPN)
 - AWS VPN CloudHub: establishing a hub-and-spoke model for connecting remote branch offices through a VPN (routes are advertised to let each site communicate with each other).
 - Software VPN: provide your own VPN like OpenVPN
-- Transit VPC: connecting geographically disperse VPCs (like a hub of VPCs), also to connect external providers VPCs like Azure. Can address the overlapping CIDR problem.Additional filtering can be done over the traffic.
+- Transit VPC: connecting geographically disperse VPCs (like a hub of VPCs), also to connect external providers VPCs like Azure. Can address the overlapping CIDR problem. Additional filtering can be done over the traffic. PrivateLink endpoints are accessible cross regions.
 - VPC peering: recommended approach for connecting multiple Amazon VPCs within and across regions. No transitive connection between multiple VPCs, need to set a route.
 - AWS PrivateLink: connection between VPCs, AWS services using interface endpoints. Pro: redundant, use AWS backbones. 1 interface gateway endpoint (dynamo and S3), the other are interface endpoint. For Gateway endpoints, security is with VPC Endpoint Policies.
 - Egress-Only Internet Gateway: for IPv6 only as all addresses are public by default, this is stateful, must create a custom route `::/0`, to use instead of NAT IPv4.
 - NAT Gateway is AWS managed, versus NAT Instance which a simple EC2 instance acting as a NAT. Gateway is high available in the AZ, not the NAT Instance.
+- Transit Gateway: AWS Transit Gateway connects your Amazon Virtual Private Clouds (VPCs) and on-premises networks through a central hub. Transit Gateway acts as a highly scalable cloud router—each new connection is made only once.
 
 ### Enhanced networking
 
 - custom virtual AWS network interface to get higher speed, available in AWS Linux AMI automatically.
 - placement groups:
-  - clustered: into single AZ
-  - spread: max 7 instances per group
-  - partition: extended spread when logical partition can be attached on the same rack hardware for performance, while still spreading the total cluster across multiple rack to ensure HA.
+  - _clustered_: into single AZ. Packs instances close together inside an Availability Zone. This strategy enables workloads to achieve the low-latency network performance necessary for tightly-coupled node-to-node communication that is typical of HPC applications.
+  - _spread_: max 7 instances per group. Strictly places a small group of instances across distinct underlying hardware to reduce correlated failures.
+  - _partition_: extended spread when logical partition can be attached on the same rack hardware for performance, while still spreading the total cluster across multiple racks to ensure HA. This strategy is typically used by large distributed and replicated workloads, such as Hadoop, Cassandra, and Kafka.
+  - can be moved in and out at any time as long as the instance is in a stopped state.
 
 ### Route53
 
@@ -358,8 +365,12 @@ Multi-protocol Label Switching](https://d1.awsstatic.com/whitepapers/Networking/
 - ✔️ [AWS re:Invent 2017: Networking Many VPCs: Transit and Shared Architectures](https://www.youtube.com/watch?v=KGKrVO9xlqI)
 - [AWS re:Invent 2017: Another Day, Another Billion Flows](https://www.youtube.com/watch?v=8gc2DgBqo9U)
 - ✔️ [AWS re:Invent 2017: Deep Dive into the New Network Load Balancer](https://www.youtube.com/watch?v=z0FBGIT1Ub4)
-- [MLPS](https://aws.amazon.com/blogs/networking-and-content-delivery/tag/mpls/)
+- ✔️ [MLPS](https://aws.amazon.com/blogs/networking-and-content-delivery/tag/mpls/)
 - ✔️ [Building a Scalable and Secure Multi-VPC AWS Network Infrastructure](https://d1.awsstatic.com/whitepapers/building-a-scalable-and-secure-multi-vpc-aws-network-infrastructure.pdf)
+- ✔️ [AWS re:Invent 2021 - Advanced Amazon VPC design and new capabilities](https://www.youtube.com/watch?v=fi3vcenH6UY)
+- ✔️ [Advanced VPC Connectivity Patterns - Level 400](https://www.youtube.com/watch?v=X_4ekgRc4C8)
+- [IPv6 whitepaper](https://docs.aws.amazon.com/whitepapers/latest/ipv6-on-aws/IPv6-on-AWS.html)
+- [AWS IPAM](https://aws.amazon.com/blogs/aws/network-address-management-and-auditing-at-scale-with-amazon-vpc-ip-address-manager/)
 
 ## Security
 
