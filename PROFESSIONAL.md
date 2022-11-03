@@ -523,6 +523,8 @@ Start with VPN connection from on-prem. Later move to Direct Connect (BGP) with 
 
 ### AWS Well Architected Framework
 
+Labs: <https://github.com/awslabs/aws-well-architected-labs>
+
 #### Operational Excellence Pillar
 
 - **Perform operations as code**: In the cloud, you can apply the same engineering discipline that you use for application code to your entire environment. You can define your entire workload (applications, infrastructure, etc.) as code and update it with code. You can script your operations procedures and automate their execution by triggering them in response to events. By performing operations as code, you limit human error and enable consistent responses to events.
