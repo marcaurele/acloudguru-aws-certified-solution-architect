@@ -590,6 +590,7 @@ Labs: <https://github.com/awslabs/aws-well-architected-labs>
 - [AWS re:Invent 2017: Elastic Load Balancing Deep Dive and Best Practices](https://www.youtube.com/watch?v=9TwkMMogojY)
 - [AWS Well-Architected Framework](https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html)
 - [Implementing Micro-services on AWS](https://docs.aws.amazon.com/whitepapers/latest/microservices-on-aws/microservices-on-aws.pdf)
+- ✔️ [AWS re:Invent 2021 - Building next-gen applications with event-driven architectures](https://www.youtube.com/watch?v=U5GZNt0iMZY) (level 300)
 
 ## Business Continuity
 
