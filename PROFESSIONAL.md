@@ -606,6 +606,8 @@ Labs: <https://github.com/awslabs/aws-well-architected-labs>
 
 ![HA - DR - RPO](./assets/2022-06-06_20-44.png)
 
+![Disaster recovery (DR) strategies](./assets/disaster-recovery-strategies.png)
+
 ### Business Continuity Documentation
 
 - [AWS Prescriptive Guidance / Backup and recovery approaches on AWS](https://docs.aws.amazon.com/prescriptive-guidance/latest/backup-recovery/backup-recovery.pdf)
