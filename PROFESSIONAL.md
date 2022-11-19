@@ -312,6 +312,11 @@ Decentralized ownership
   - 255=Broadcast=Reserved-as-not-usable.
 - VPCs support IPv4 netmask range from /16 to /28.
 - VPCs can have public addresses but still require a NAT for the outbound traffic.
+- IPv6 is given with a /56 CIDR block
+- IPv6 must be globally unique across AWS
+- bring your own IPv6 can accept /48
+- subnet can get a /64 block (for dual stack compatibility), meaning 8 bits for subnet = 256 subnets per VPC
+- always use DHCP to ensure NIC matches the ENI due to spoofing security mechanism.
 
 ### Services
 
@@ -369,8 +374,8 @@ Multi-protocol Label Switching](https://d1.awsstatic.com/whitepapers/Networking/
 - ✔️ [Building a Scalable and Secure Multi-VPC AWS Network Infrastructure](https://d1.awsstatic.com/whitepapers/building-a-scalable-and-secure-multi-vpc-aws-network-infrastructure.pdf)
 - ✔️ [AWS re:Invent 2021 - Advanced Amazon VPC design and new capabilities](https://www.youtube.com/watch?v=fi3vcenH6UY)
 - ✔️ [Advanced VPC Connectivity Patterns - Level 400](https://www.youtube.com/watch?v=X_4ekgRc4C8)
-- [IPv6 whitepaper](https://docs.aws.amazon.com/whitepapers/latest/ipv6-on-aws/IPv6-on-AWS.html)
-- [AWS IPAM](https://aws.amazon.com/blogs/aws/network-address-management-and-auditing-at-scale-with-amazon-vpc-ip-address-manager/)
+- ✔️ [IPv6 whitepaper](https://docs.aws.amazon.com/whitepapers/latest/ipv6-on-aws/IPv6-on-AWS.html)
+- ✔️ [AWS IPAM](https://aws.amazon.com/blogs/aws/network-address-management-and-auditing-at-scale-with-amazon-vpc-ip-address-manager/)
 
 ## Security
 
