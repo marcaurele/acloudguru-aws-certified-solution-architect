@@ -592,7 +592,7 @@ Labs: <https://github.com/awslabs/aws-well-architected-labs>
 - [Automating Elasticity](https://d1.awsstatic.com/whitepapers/cost-optimization-automating-elasticity.pdf)
 - [AWS re:Invent 2017: Scaling Up to Your First 10 Million Users](https://www.youtube.com/watch?v=w95murBkYmU)
 - [AWS re:Invent 2017: Learn to Build a Cloud-Scale WordPress Site That Can Keep Up](https://www.youtube.com/watch?v=dPdac4LL884)
-- [AWS re:Invent 2017: Elastic Load Balancing Deep Dive and Best Practices](https://www.youtube.com/watch?v=9TwkMMogojY)
+- ✔️ [AWS re:Invent 2017: Elastic Load Balancing Deep Dive and Best Practices](https://www.youtube.com/watch?v=9TwkMMogojY)
 - [AWS Well-Architected Framework](https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html)
 - [Implementing Micro-services on AWS](https://docs.aws.amazon.com/whitepapers/latest/microservices-on-aws/microservices-on-aws.pdf)
 - ✔️ [AWS re:Invent 2021 - Building next-gen applications with event-driven architectures](https://www.youtube.com/watch?v=U5GZNt0iMZY) (level 300)
@@ -688,10 +688,10 @@ Build applications and websites fast with low-cost, pre-configured cloud resourc
 
 ### AWS Machine Learning
 
-- SageMaker: machine learning service managed by AWS (build, train and deploy models)
-- Amazon Comprehend: Derive and understand valuable insights from text within documents. Amazon Comprehend is a natural-language processing (NLP) service that uses machine learning to uncover valuable insights and connections in text.
-- Amazon Lex: Build chatbots with conversational AI. Amazon Lex is a fully managed artificial intelligence (AI) service with advanced natural language models to design, build, test, and deploy conversational interfaces in applications.
-- Amazon Polly: text to speech in many languages. Deploy high-quality, natural-sounding human voices in dozens of languages.
+- **SageMaker**: machine learning service managed by AWS (build, train and deploy models)
+- **Amazon Comprehend (text comprehension)**: Derive and understand valuable insights from text within documents. Amazon Comprehend is a natural-language processing (NLP) service that uses machine learning to uncover valuable insights and connections in text.
+- **Amazon Lex: Build chatbots** with conversational AI. Amazon Lex is a fully managed artificial intelligence (AI) service with advanced natural language models to design, build, test, and deploy conversational interfaces in applications. _Think Lex as Alexa for voice recognition._
+- **Amazon Polly: text to speech**in many languages. Deploy high-quality, natural-sounding human voices in dozens of languages. Return a MP3 audio stream, unlimited replay.
 
 ### Deployment and Operations management Documentation
 
