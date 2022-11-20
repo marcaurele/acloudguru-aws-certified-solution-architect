@@ -27,6 +27,8 @@ Important:
 - can achieve at least 3,500 `PUT/COPY/POST/DELETE` and 5,500 `GET/HEAD` requests per second per prefix in a bucket
 - no limits for the number of connections made to your bucket
 - encrypted buckets have a upper limit and will throttle requests due to the KMS encrypt request account limit.
+- [bucket policy examples](https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.html)
+- [controlling access from VPC endpoints with bucket policies](https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies-vpc-endpoint.html)
 
 #### S3 Object Lambda
 
@@ -34,7 +36,7 @@ Important:
 
 ![S3 Object Lambda](https://docs.aws.amazon.com/whitepapers/latest/building-data-lakes/images/storage-best-practices8.png)
 
-### Amazon Galcier
+### Amazon Glacier
 
 - max file size is 40TB
 - Glacier Vault lock to avoid archive to be changed / modified
@@ -347,6 +349,9 @@ Decentralized ownership
 
 ### CloudFront
 
+- [How do I use CloudFront to serve a static website hosted on Amazon S3?](https://aws.amazon.com/premiumsupport/knowledge-center/cloudfront-serve-static-website/)
+- [Values that you specify when you create or update a distribution](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html)
+
 | |cloudFront functions | Lambda@Edge
 --- | --- | ---
 Programming languages | JavaScript (ECMAScript 5.1 compliant) | Node.js and Python
@@ -376,8 +381,13 @@ Multi-protocol Label Switching](https://d1.awsstatic.com/whitepapers/Networking/
 - ✔️ [Advanced VPC Connectivity Patterns - Level 400](https://www.youtube.com/watch?v=X_4ekgRc4C8)
 - ✔️ [IPv6 whitepaper](https://docs.aws.amazon.com/whitepapers/latest/ipv6-on-aws/IPv6-on-AWS.html)
 - ✔️ [AWS IPAM](https://aws.amazon.com/blogs/aws/network-address-management-and-auditing-at-scale-with-amazon-vpc-ip-address-manager/)
+- ✔️ [Direct Connect Troubleshooting](https://docs.aws.amazon.com/directconnect/latest/UserGuide/Troubleshooting.html)
 
 ## Security
+
+### IAM
+
+- [Troubleshooting IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot.html)
 
 ### Accounts
 
@@ -390,6 +400,11 @@ Multi-protocol Label Switching](https://d1.awsstatic.com/whitepapers/Networking/
 - AWS Directory Service for MS AD: AWS-managed full Microsoft AD
 - AD Connector: Allow on-prem users to log in into AWS using existing AD credentials. Allow also EC2 to join AD domain. Can used IAM roles. Support Radius MFA.
 - Simple AD: low scale, low cost AD implementation based on Samba (simple user directory with LDAP compatibility). MFA not supported. Kerberos based SSO. Does not support trust relationship with other domains.
+
+### KMS
+
+- [Grants in AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/grants.html) for dynamic least privilege principle.
+- However, when you create, retire, or revoke a grant, there might be a brief delay, usually less than five minutes, until the operation achieves eventual consistency. To use the permissions in a grant immediately, use a grant token.
 
 ### DDoS
 
@@ -422,7 +437,21 @@ _FAQ: <https://aws.amazon.com/servicecatalog/faqs/>_
 
 ### Amazon Macie
 
-Fully managed data security and data privacy service that uses machine learning and pattern matching to discover, monitor, and protect your sensitive data stored in your data lake. Macie can be used to scan your data lakes and discover sensitive information such as PII or financial data, and identify and report overly permissive or unencrypted buckets.
+Fully managed data security and data privacy service that uses machine learning and pattern matching to discover, monitor, and protect **your sensitive data stored in your data lake**. Macie can be used to scan your data lakes and discover sensitive information such as PII or financial data, and identify and report overly permissive or unencrypted buckets.
+
+### AWS GuardDuty
+
+AWS GuardDuty is a managed service that can watch CloudTrail, VPC Flow Logs and DNS Logs, **watching for malicious activity**. It has a build-in list of suspect IP addresses and you can also upload your own lists of IPs. GuardDuty can trigger CloudWatch events which can then be used for a variety of activities like notifications or automatically responding to a threat.
+
+### AWS Firewall Manager
+
+Centrally configure and manage firewall rules across your accounts.
+
+- Centrally deploy AWS Network Firewall across VPCs.
+- Automatically deploy Amazon VPC security groups, AWS WAF rules, AWS Shield Advanced protections, AWS Network Firewall rules, and Amazon Route 53 Resolver DNS Firewall rules.
+- Cross-account protection policies.
+- Dashboard with compliance notifications.
+- Audit existing and future security groups in your VPCs.
 
 ### Aws Artifact
 
@@ -461,6 +490,8 @@ AWS Artifact provides on-demand downloads of AWS security and compliance documen
 - Server migration: agent for Vmware or HyperV to clone and periodically sync AMI changes to move or backup/recovery image on the cloud.
 - Database migration service: can use a data conversion tool to help migrating to cloud DB (Redshift, RDS, Dynamodb)
 - Application Discovery Service: collects config, usage and behavior data from on prem servers to help estimate TCO of running on AWS. Gather information about on-prem data centers (inventory).
+- [AWS Database Migration Service FAQs](https://aws.amazon.com/dms/faqs/)
+- [AWS Storage Gateway FAQs](https://aws.amazon.com/storagegateway/faqs/)
 
 ### Network migrations and cutovers
 
@@ -480,6 +511,14 @@ Start with VPN connection from on-prem. Later move to Direct Connect (BGP) with 
 
 - scale in + scale out = horizontal scaling terms
 - scale up + scale down = vertical scaling terms
+
+### Lambda
+
+- AWS Lambda natively supports Java, Go, PowerShell, Node.js, C#, Python, and Ruby code.
+- You can configure each Lambda function with its own ephemeral storage between 512MB and 10,240MB, in 1MB increments. The ephemeral storage is available in each function’s /tmp directory. Each function has access to 512MB of storage at no additional cost.
+- TCP port 25 traffic is also blocked as an anti-spam measure.
+- AWS Lambda functions can be configured to run up to 15 minutes per execution. You can set the timeout to any value between 1 second and 15 minutes.
+- Lambda supports container images with a size of up to 10GB.
 
 ### Auto scaling
 
@@ -641,6 +680,7 @@ Labs: <https://github.com/awslabs/aws-well-architected-labs>
   - Stacks (TF workspaces): the entire environment described by the template and created, updated and deleted as a single unit.
   - Change sets (TF plan): a summary of proposed changes to your stack that will allow you to see how those changes might impact your existing resources before implementing them.
 - Stack policies deny you to do any update, so it must be declared in the policy to allow such operations.
+- [Troubleshooting](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html)
 
 ### AWS Config
 
@@ -678,7 +718,7 @@ Build applications and websites fast with low-cost, pre-configured cloud resourc
 ### Business Applications and End-USer Computing
 
 - Amazon Workspaces: remote desktop (full desktop).
-- Amazon AppStream: show only a hosted application (application hosting).
+- Amazon AppStream: show only a hosted application (application hosting) on non persistent desktops from any location.
 - AWS Connect: center solution with configurable call.
 - Amazon Chime: online meeting and video conferencing service.
 - Amazon WorkDocs: like GDrive.
@@ -699,7 +739,7 @@ Build applications and websites fast with low-cost, pre-configured cloud resourc
 - [Infrastructure as Code](https://d1.awsstatic.com/whitepapers/DevOps/infrastructure-as-code.pdf)
 - [Practicing Continuous Integration and Continuous Delivery on AWS](https://d1.awsstatic.com/whitepapers/DevOps/practicing-continuous-integration-continuous-delivery-on-AWS.pdf)
 - [Overview of Deployment Options on AWS](https://d1.awsstatic.com/whitepapers/overview-of-deployment-options-on-aws.pdf)
-- [AWS re:Invent 2017: Deep Dive on AWS CloudFormation](https://www.youtube.com/watch?v=01hy48R9Kr8)
+- ✔️ [AWS re:Invent 2017: Deep Dive on AWS CloudFormation](https://www.youtube.com/watch?v=01hy48R9Kr8)
 - [AWS re:Invent 2017: Moving to Containers: Building with Docker and Amazon ECS](https://www.youtube.com/watch?v=Qik9LBktjgs)
 - [AWS re:Invent 2017: Continuous Integration Best Practices for Software Development Teams](https://www.youtube.com/watch?v=GEPJ7Lo346A)
 
