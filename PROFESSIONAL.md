@@ -464,11 +464,11 @@ AWS Artifact provides on-demand downloads of AWS security and compliance documen
 - [AWS re:Invent 2017: Best Practices for Managing Security Operations on AWS](https://www.youtube.com/watch?v=gjrcoK8T3To)
 - ✔️ [AWS re:Invent 2018: [REPEAT 1] Become an IAM Policy Master in 60 Minutes or Less](https://www.youtube.com/watch?v=YQsK4MtsELU) (nice)
 - ✔️ [AWS re:Invent 2017: Architecting Security and Governance Across a Multi-Account Stra](https://www.youtube.com/watch?v=71fD8Oenwxc) (not that great)
-- [AWS re:Inforce 2019: Managing Multi-Account AWS Environments Using AWS Organizations](https://www.youtube.com/watch?v=fxo67UeeN1A)
-- [AWS Well-Architected Framework - Security Pillar](https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/wellarchitected-security-pillar.pdf)
-- ✔️ [AWS re:invent 2017: Best Practices for Implementing AWS Key Management Service](https://www.youtube.com/watch?v=X1eZjXQ55ec) (level 300)
+- ✔️ [AWS re:Inforce 2019: Managing Multi-Account AWS Environments Using AWS Organizations](https://www.youtube.com/watch?v=fxo67UeeN1A)
+- ✔️ [AWS Well-Architected Framework - Security Pillar](https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/wellarchitected-security-pillar.pdf)
+- ✔️ [AWS re:Invent 2017: Best Practices for Implementing AWS Key Management Service](https://www.youtube.com/watch?v=X1eZjXQ55ec) (level 300)
 - [AWS re:Invent 2017: A Deep Dive into AWS Encryption Services](https://www.youtube.com/watch?v=gTZgxsCTfbk) (level 300)
-- [AWS re:Inforce 2022 - AWS Identity and Access Management (IAM) deep dive](https://www.youtube.com/watch?v=YMj33ToS8cI) (level 300)
+- ✔️ [AWS re:Inforce 2022 - AWS Identity and Access Management (IAM) deep dive](https://www.youtube.com/watch?v=YMj33ToS8cI) (level 300)
 
 ## Migrations
 
@@ -477,7 +477,7 @@ AWS Artifact provides on-demand downloads of AWS security and compliance documen
 - Re-host: lift ans shift
 - Re-platform: Lift and reshape
 - Re-Purchase: drop and shop
-- Reachitect: redesign in a cloud native manner
+- Re-architect: redesign in a cloud native manner
 - Retire: get rid of apps not needed
 - Retain: do nothing option
 
@@ -493,19 +493,19 @@ AWS Artifact provides on-demand downloads of AWS security and compliance documen
 - [AWS Database Migration Service FAQs](https://aws.amazon.com/dms/faqs/)
 - [AWS Storage Gateway FAQs](https://aws.amazon.com/storagegateway/faqs/)
 
-### Network migrations and cutovers
+### Network migrations and cut-overs
 
 Start with VPN connection from on-prem. Later move to Direct Connect (BGP) with VPN as backup, requires to setup BGP preferences to use the Direct Connect link instead of the VPN (while having the same BGP prefix for both). On AWS Direct Connect is always the preferred route.
 
 ### Migration documentation
 
-- [AWS Migration Whitepaper](https://d1.awsstatic.com/whitepapers/Migration/aws-migration-whitepaper.pdf)
+- [AWS Migration Whitepaper](https://d1.awsstatic.com/whitepapers/Migration/aws-migration-whitepaper.pdf) _(archived)_
 - [Overview of AWS Cloud Adoption Framework](https://docs.aws.amazon.com/whitepapers/latest/overview-aws-cloud-adoption-framework/overview-aws-cloud-adoption-framework.pdf)
 - [Migrating Applications Running Relational Databases to AWS](https://d1.awsstatic.com/whitepapers/Migration/migrating-applications-to-aws.pdf)
 - [Cloud-Driven Enterprise Transformation on AWS](https://d1.awsstatic.com/whitepapers/cloud-driven-enterprise-transformation-on-aws.pdf?did=wp_card&trk=wp_card)
-- [AWS re:Invent 2017: How to Assess Your Organization's Readiness to Migrate at Scale](https://www.youtube.com/watch?v=id-PY0GBHXA)
-- [AWS re:Invent 2017: Migrating Databases and Data Warehouses to the Cloud](https://www.youtube.com/watch?v=Y33TviLMBFY)
-- [AWS re:Invent 2017: Deep Dive: Using Hybrid Storage with AWS Storage Gateway to Solve Pn-Prem Storage Problems](https://www.youtube.com/watch?v=9wgaV70FeaM)
+- ~~[AWS re:Invent 2017: How to Assess Your Organization's Readiness to Migrate at Scale](https://www.youtube.com/watch?v=id-PY0GBHXA)~~
+- ✔️ [AWS re:Invent 2017: Migrating Databases and Data Warehouses to the Cloud](https://www.youtube.com/watch?v=Y33TviLMBFY)
+- ✔️ [AWS re:Invent 2017: Deep Dive: Using Hybrid Storage with AWS Storage Gateway to Solve Pn-Prem Storage Problems](https://www.youtube.com/watch?v=9wgaV70FeaM)
 
 ## Architecting to Scale
 
@@ -732,6 +732,7 @@ Build applications and websites fast with low-cost, pre-configured cloud resourc
 - **Amazon Comprehend (text comprehension)**: Derive and understand valuable insights from text within documents. Amazon Comprehend is a natural-language processing (NLP) service that uses machine learning to uncover valuable insights and connections in text.
 - **Amazon Lex: Build chatbots** with conversational AI. Amazon Lex is a fully managed artificial intelligence (AI) service with advanced natural language models to design, build, test, and deploy conversational interfaces in applications. _Think Lex as Alexa for voice recognition._
 - **Amazon Polly: text to speech**in many languages. Deploy high-quality, natural-sounding human voices in dozens of languages. Return a MP3 audio stream, unlimited replay.
+- **Amazon Rekognition**: automate your **image and video analysis** with machine learning (face compare, face detection and analysis, labels, custom labels, text detection).
 
 ### Deployment and Operations management Documentation
 
