@@ -331,7 +331,7 @@ Decentralized ownership
 - AWS PrivateLink: connection between VPCs, AWS services using interface endpoints. Pro: redundant, use AWS backbones. 1 interface gateway endpoint (dynamo and S3), the other are interface endpoint. For Gateway endpoints, security is with VPC Endpoint Policies.
 - Egress-Only Internet Gateway: for IPv6 only as all addresses are public by default, this is stateful, must create a custom route `::/0`, to use instead of NAT IPv4.
 - NAT Gateway is AWS managed, versus NAT Instance which a simple EC2 instance acting as a NAT. Gateway is high available in the AZ, not the NAT Instance.
-- Transit Gateway: AWS Transit Gateway connects your Amazon Virtual Private Clouds (VPCs) and on-premises networks through a central hub. Transit Gateway acts as a highly scalable cloud router—each new connection is made only once.
+- Transit Gateway: AWS Transit Gateway connects your Amazon Virtual Private Clouds (VPCs) and on-premises networks through a central hub. Transit Gateway acts as a highly scalable cloud router—each new connection is made only once. Transit Gateway is a Regional resource and can connect thousands of VPCs within the same AWS Region.
 
 ### Enhanced networking
 
@@ -364,6 +364,15 @@ Access to the request body | No | Yes
 
 _<https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/edge-functions.html>_
 
+### AWS Global Accelerator
+
+AWS Global Accelerator is a networking service that helps you improve the availability, performance, and security of your public applications. Global Accelerator provides two global static public IPs that act as a fixed entry point to your application endpoints, such as Application Load Balancers, Network Load Balancers, Amazon Elastic Compute Cloud (EC2) instances, and elastic IPs.
+
+- Improve network performance for your applications by up to 60%.
+- Keep your applications available with quick failover for multi-Region architectures.
+- Achieve deterministic routing by removing DNS cache dependencies.
+- Protect your applications from DDoS attacks at the edge versus in Region.
+
 ### Network documentation
 
 - ✔️ [AWS re:Invent 2016: Amazon Global Network Overview with James Hamilton](https://www.youtube.com/watch?v=uj7Ting6Ckk)
@@ -382,6 +391,7 @@ Multi-protocol Label Switching](https://d1.awsstatic.com/whitepapers/Networking/
 - ✔️ [IPv6 whitepaper](https://docs.aws.amazon.com/whitepapers/latest/ipv6-on-aws/IPv6-on-AWS.html)
 - ✔️ [AWS IPAM](https://aws.amazon.com/blogs/aws/network-address-management-and-auditing-at-scale-with-amazon-vpc-ip-address-manager/)
 - ✔️ [Direct Connect Troubleshooting](https://docs.aws.amazon.com/directconnect/latest/UserGuide/Troubleshooting.html)
+- ✔️ [Building a Scalable and Secure Multi-VPC AWS Network Infrastructure](https://d1.awsstatic.com/whitepapers/building-a-scalable-and-secure-multi-vpc-aws-network-infrastructure.pdf) - describes multiple network architectures with pros and cons. Must read!
 
 ## Security
 
@@ -457,6 +467,10 @@ Centrally configure and manage firewall rules across your accounts.
 
 AWS Artifact provides on-demand downloads of AWS security and compliance documents, such as AWS ISO certifications, Payment Card Industry (PCI), and Service Organization Control (SOC) reports. You can submit the security and compliance documents (also known as audit artifacts) to your auditors or regulators to demonstrate the security and compliance of the AWS infrastructure and services that you use. You can also use these documents as guidelines to evaluate your own cloud architecture and assess the effectiveness of your company's internal controls.
 
+### AWS Inspector
+
+Amazon Inspector is an automated vulnerability management service that continually scans Amazon Elastic Compute Cloud (EC2) and container workloads for software vulnerabilities and unintended network exposure.
+
 ### Security documentation
 
 - ✔️ [Organizing Your AWS Environment Using Multiple Accounts](https://docs.aws.amazon.com/whitepapers/latest/organizing-your-aws-environment/organizing-your-aws-environment.html) (level 200)
@@ -517,7 +531,7 @@ Start with VPN connection from on-prem. Later move to Direct Connect (BGP) with 
 - AWS Lambda natively supports Java, Go, PowerShell, Node.js, C#, Python, and Ruby code.
 - You can configure each Lambda function with its own ephemeral storage between 512MB and 10,240MB, in 1MB increments. The ephemeral storage is available in each function’s /tmp directory. Each function has access to 512MB of storage at no additional cost.
 - TCP port 25 traffic is also blocked as an anti-spam measure.
-- AWS Lambda functions can be configured to run up to 15 minutes per execution. You can set the timeout to any value between 1 second and 15 minutes.
+- AWS Lambda functions can be configured to run **up to 15 minutes per execution**. You can set the timeout to any value between 1 second and 15 minutes.
 - Lambda supports container images with a size of up to 10GB.
 
 ### Auto scaling
@@ -660,7 +674,8 @@ Labs: <https://github.com/awslabs/aws-well-architected-labs>
 - [AWS re:Invent 2017: Models of Availability](https://www.youtube.com/watch?v=xc_PZ5OPXcc)
 - [AWS re:Invent 2017: How to Design a Multi-Region Active-Active Architecture](https://www.youtube.com/watch?v=RMrfzR4zyM4)
 - [AWS re:Invent 2017: Disaster Recovery with AWS: Tiered Approaches to Balance Cost with Recovery Objectives](https://www.youtube.com/watch?v=a7EMou07hRc)
-- ✔️ [REL13-BP02 Use defined recovery strategies to meet the recovery objectives](<https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/rel_planning_for_recovery_disaster_recovery.html>
+- ✔️ [REL13-BP02 Use defined recovery strategies to meet the recovery objectives](https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/rel_planning_for_recovery_disaster_recovery.html)
+- ✔️ [Disaster Recovery of Workloads on AWS: Recovery in the Cloud](https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-workloads-on-aws.html)
 
 ## Deployment and Operations management
 
@@ -714,6 +729,7 @@ Build applications and websites fast with low-cost, pre-configured cloud resourc
 - automation:automating routine maintenance tasks and scripts
 - run-command: run commands and scripts without log in via SHH/RDP
 - patch-manager: automates process of patching. The default predefined patch baseline for Windows servers in Patch Manager is `AWS-DefaultPatchBaseline` (or `AWS-WindowsPredefinedPatchBaseline-OS`), or for OS + applications use `AWS-WindowsPredefinedPatchBaseline-OS-Applications`.
+- use a patch group to associate managed nodes with a specific patch baseline in Patch Manager. Tag key must be `Patch Group` or `PatchGroup`.
 
 ### Business Applications and End-USer Computing
 
