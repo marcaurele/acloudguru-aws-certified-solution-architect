@@ -300,7 +300,7 @@ Decentralized ownership
 - <https://d1.awsstatic.com/whitepapers/Multi_Tenant_SaaS_Storage_Strategies.pdf> _(archived)_
 - ✔️ <https://d0.awsstatic.com/whitepapers/performance-at-scale-with-amazon-elasticache.pdf>
 - ✔️ [AWS re:Invent 2017: Deep dive on S3 and Glacier storage management](https://www.youtube.com/watch?v=SUWqDOnXeDw)
-- [AWS re:Invent 2017: ElastiCache Deep Dive: Best Practices and Usage Patterns](https://www.youtube.com/watch?v=_YYBdsuUq2M)
+- ✔️ [AWS re:Invent 2017: ElastiCache Deep Dive: Best Practices and Usage Patterns](https://www.youtube.com/watch?v=_YYBdsuUq2M)
 - ✔️ [AWS re:Invent 2017: Deep Dive: Using Hybrid Storage with AWS Storage Gateway to Solve On-Premises Storage Problems](https://www.youtube.com/watch?v=9wgaV70FeaM)
 - <https://d1.awsstatic.com/whitepapers/cost-optimization-storage-optimization.pdf> _(archived)_
 
@@ -463,6 +463,10 @@ Centrally configure and manage firewall rules across your accounts.
 - Dashboard with compliance notifications.
 - Audit existing and future security groups in your VPCs.
 
+### AWS Network Firewall
+
+AWS Network Firewall provides active traffic flow inspection with real-time network and application layer protections against vulnerability exploits and brute force attacks. You can filter network traffic at the perimeter of your VPC using AWS Network Firewall. Network Firewall is a stateful, managed, network firewall and intrusion detection and prevention service. Rule groups in AWS Network Firewall provide detailed criteria for packet inspection and specify what to do when a packet matches the criteria. When Network Firewall finds a match between the criteria and a packet, the packet matches the rule group. Side note: AWS Network Firewall does not support deep packet inspection for encrypted traffic. As a work around, you can decrypt traffic using a NLB before sending it to the AWS Network Firewall endpoint.
+
 ### Aws Artifact
 
 AWS Artifact provides on-demand downloads of AWS security and compliance documents, such as AWS ISO certifications, Payment Card Industry (PCI), and Service Organization Control (SOC) reports. You can submit the security and compliance documents (also known as audit artifacts) to your auditors or regulators to demonstrate the security and compliance of the AWS infrastructure and services that you use. You can also use these documents as guidelines to evaluate your own cloud architecture and assess the effectiveness of your company's internal controls.
@@ -502,7 +506,7 @@ Amazon Inspector is an automated vulnerability management service that continual
 ### Migration tools
 
 - Server migration: agent for Vmware or HyperV to clone and periodically sync AMI changes to move or backup/recovery image on the cloud.
-- Database migration service: can use a data conversion tool to help migrating to cloud DB (Redshift, RDS, Dynamodb)
+- Database migration service: can use a data conversion tool to help migrating to cloud DB (Redshift, RDS, Dynamodb), but cannot perform schema conversion from Couchbase.
 - Application Discovery Service: collects config, usage and behavior data from on prem servers to help estimate TCO of running on AWS. Gather information about on-prem data centers (inventory).
 - [AWS Database Migration Service FAQs](https://aws.amazon.com/dms/faqs/)
 - [AWS Storage Gateway FAQs](https://aws.amazon.com/storagegateway/faqs/)
@@ -727,7 +731,7 @@ Build applications and websites fast with low-cost, pre-configured cloud resourc
 - resource-groups: group resource through tagging for organization
 - maintenance-window: define schedule for instances patch, update apps...
 - automation:automating routine maintenance tasks and scripts
-- run-command: run commands and scripts without log in via SHH/RDP
+- run-command: run commands and scripts without log in via SSH/RDP
 - patch-manager: automates process of patching. The default predefined patch baseline for Windows servers in Patch Manager is `AWS-DefaultPatchBaseline` (or `AWS-WindowsPredefinedPatchBaseline-OS`), or for OS + applications use `AWS-WindowsPredefinedPatchBaseline-OS-Applications`.
 - use a patch group to associate managed nodes with a specific patch baseline in Patch Manager. Tag key must be `Patch Group` or `PatchGroup`.
 
