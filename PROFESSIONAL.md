@@ -332,6 +332,7 @@ Decentralized ownership
 - Egress-Only Internet Gateway: for IPv6 only as all addresses are public by default, this is stateful, must create a custom route `::/0`, to use instead of NAT IPv4.
 - NAT Gateway is AWS managed, versus NAT Instance which a simple EC2 instance acting as a NAT. Gateway is high available in the AZ, not the NAT Instance.
 - Transit Gateway: AWS Transit Gateway connects your Amazon Virtual Private Clouds (VPCs) and on-premises networks through a central hub. Transit Gateway acts as a highly scalable cloud router—each new connection is made only once. Transit Gateway is a Regional resource and can connect thousands of VPCs within the same AWS Region.
+- VPC Lattice: application layer service that consistently connects, monitors, and secures communications between your services.
 
 ### Enhanced networking
 
@@ -389,9 +390,13 @@ Multi-protocol Label Switching](https://d1.awsstatic.com/whitepapers/Networking/
 - ✔️ [AWS re:Invent 2021 - Advanced Amazon VPC design and new capabilities](https://www.youtube.com/watch?v=fi3vcenH6UY)
 - ✔️ [Advanced VPC Connectivity Patterns - Level 400](https://www.youtube.com/watch?v=X_4ekgRc4C8)
 - ✔️ [IPv6 whitepaper](https://docs.aws.amazon.com/whitepapers/latest/ipv6-on-aws/IPv6-on-AWS.html)
+- [IPv6 news](https://aws.amazon.com/vpc/ipv6/)
 - ✔️ [AWS IPAM](https://aws.amazon.com/blogs/aws/network-address-management-and-auditing-at-scale-with-amazon-vpc-ip-address-manager/)
 - ✔️ [Direct Connect Troubleshooting](https://docs.aws.amazon.com/directconnect/latest/UserGuide/Troubleshooting.html)
 - ✔️ [Building a Scalable and Secure Multi-VPC AWS Network Infrastructure](https://d1.awsstatic.com/whitepapers/building-a-scalable-and-secure-multi-vpc-aws-network-infrastructure.pdf) - describes multiple network architectures with pros and cons. Must read!
+- ✔️ [AWS services that support IPv6](https://docs.aws.amazon.com/general/latest/gr/aws-ipv6-support.html)
+- ✔️ [AWS re:Invent 2022 - Advanced VPC design and new Amazon VPC capabilities (NET302)](https://www.youtube.com/watch?v=cbUNbK8ZdA0)
+- ✔️ [AWS re:Invent 2022 - Dive deep on AWS networking infrastructure (NET402)](https://www.youtube.com/watch?v=HJNR_dX8g8c)
 
 ## Security
 
