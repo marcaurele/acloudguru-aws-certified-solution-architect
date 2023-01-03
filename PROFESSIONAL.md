@@ -15,6 +15,8 @@ Important:
   - ✔️ [Best Practices Design Patterns: Optimizing Amazon S3 Performance](https://docs.aws.amazon.com/whitepapers/latest/s3-optimizing-performance-best-practices/welcome.html?did=wp_card&trk=wp_card)
 - know when to use various data stores.
 
+![Storage class choices matters at scale](assets/aws-storage-class-time-retrieval.png)
+
 ### Amazon S3
 
 - Introduced in 2006, one of the first service
