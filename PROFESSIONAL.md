@@ -170,6 +170,11 @@ If you need to:
   - cost: minimal
   - benefit: very fast write or updates for non-partition key items
 
+### Amazon DocumentDB
+
+- Managed MongoDB by AWS
+- Target for any MongoDB migration (rather than DynamoDB)
+
 ### Amazon Redshift
 
 - fully managed, cluster to petabyte
@@ -205,6 +210,11 @@ Part of the Kinesis family of services that makes it easy to collect, process, a
   - and Lambda functions (to transform the input data to anything: JSON, Apache Parquet, Apache ORC).
 - can convert your input JSON data to Apache Parquet and Apache ORC before storing the data into your data lake (save space and allow faster queries)
 - can concatenate multiple incoming records, and then deliver them to Amazon S3 as a single S3 object.
+
+### Amazon KeySpace
+
+- Managed Cassandra service by AWS
+- Serverless, so paying per use
 
 ### AWS Glue
 
@@ -296,6 +306,10 @@ Decentralized ownership
 
 - Based on Ether
 
+### amazon Timestream
+
+- Time series database managed by AWS
+
 ### Data models documentation
 
 - <https://d1.awsstatic.com/whitepapers/Storage/AWS%20Storage%20Services%20Whitepaper-v9.pdf> _(archived)_
@@ -305,6 +319,27 @@ Decentralized ownership
 - ✔️ [AWS re:Invent 2017: ElastiCache Deep Dive: Best Practices and Usage Patterns](https://www.youtube.com/watch?v=_YYBdsuUq2M)
 - ✔️ [AWS re:Invent 2017: Deep Dive: Using Hybrid Storage with AWS Storage Gateway to Solve On-Premises Storage Problems](https://www.youtube.com/watch?v=9wgaV70FeaM)
 - <https://d1.awsstatic.com/whitepapers/cost-optimization-storage-optimization.pdf> _(archived)_
+
+## EC2
+
+### VMware cloud on AWS
+
+- dedicated host, min 2, max 16 per cluster
+- hosted in a single AWS account
+
+### Outpost
+
+- 1U up to 42U per rack
+- lots of AWS services in own datacenter
+- hybrid cloud
+- AWS console and custom region
+- Outpost Rack:
+    - start with single 42U rack up to 96 racks
+    - gives same AWS services (most of them) locally
+- Outpost Server:
+    - individual server 1U or 2U
+    - when small space requirements
+    - provide local compute and network (branch offices, retail store,...)
 
 ## Network
 
