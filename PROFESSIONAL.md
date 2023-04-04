@@ -199,6 +199,8 @@ Same tool as Redshift but to run SQL queries against data stored on S3. Pricing 
 
 ### Amazon Kinesis Data Firehose
 
+Kinesis is the only real time service from AWS.
+
 Part of the Kinesis family of services that makes it easy to collect, process, and analyze real-time streaming data.
 
 - automatically scales to match the volume and throughput of streaming data
