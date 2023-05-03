@@ -1,5 +1,18 @@
 # Solution Architect Professional
 
+## Table of Contents
+
+1. [Data models](#data-models)
+2. [EC2](#ec2)
+3. [Network](#network)
+4. [Security](#security)
+5. [Migrations](#migrations)
+6. [Architecture to scale](#architecting-to-scale)
+7. [Business continuity](#business-continuity)
+8. [Deployment & Operations management](#deployment-and-operations-management)
+9. [Cost management](#cost-management)
+10. [Additional readings](#additional-readings)
+
 <https://d1.awsstatic.com/training-and-certification/docs-sa-pro/AWS-Certified-Solutions-Architect-Professional_Exam-Guide_C02.pdf>
 
 ## Data models
