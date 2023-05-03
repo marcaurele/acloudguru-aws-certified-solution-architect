@@ -436,6 +436,8 @@ Multi-protocol Label Switching](https://d1.awsstatic.com/whitepapers/Networking/
 - ✔️ [AWS services that support IPv6](https://docs.aws.amazon.com/general/latest/gr/aws-ipv6-support.html)
 - ✔️ [AWS re:Invent 2022 - Advanced VPC design and new Amazon VPC capabilities (NET302)](https://www.youtube.com/watch?v=cbUNbK8ZdA0)
 - ✔️ [AWS re:Invent 2022 - Dive deep on AWS networking infrastructure (NET402)](https://www.youtube.com/watch?v=HJNR_dX8g8c)
+- [AWS re:Invent 2018: Best Practices for AWS PrivateLink (NET301)](https://www.youtube.com/watch?v=85DbVGLXw3Y)
+- [AWS re:Invent 2018: [NEW LAUNCH] AWS Transit Gateway & Transit VPCs, Ref Arch for Many VPCs (NET402)](https://www.youtube.com/watch?v=ar6sLmJ45xs)
 
 ## Security
 
