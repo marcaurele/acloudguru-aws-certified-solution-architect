@@ -88,7 +88,50 @@ What happens when IAM policy conflicts with an S3 policy which conflicts with an
 
 ## Logging And Monitoring
 
+### CloudTrail
+
+- After the fact incident investigation
+- Near realtime intrusion detection
+- Compliance
+- Send to S3 bucket (need to manage retention ourselves), delivered every 5 minutes up to 15 minutes delay, SNS notifications possible, can aggregate across regions and accounts
+- enabled by default for 7 days (need config for extended time)
+- logs are shipped with an optional integrity checksum file (SHA-256).
+
+Info logged:
+
+- Metadata around the API call
+- Identity of the API caller
+- Time of the API call
+- Source IP
+- Request parameters
+- Response elements returned by the service
+
+### CloudWatch
+
+#### CloudWatch Events
+
+- near realtime stream of system events (AWS resources state change, API calls, custom events, scheduled)
+- rules to match events with target to handle the event.
+
+### AWS Config
+
+- assess, audit and evaluate configurations of your AWS resources.
+- AWS managed rules which can be enabled
+- customer managed rules. Can create Lambda to automate remediation.
+
+### AWS Inspector
+
+Automated security assessment service for vulnerabilities or deviations from best practices. Contains the CIS benchmark rules.
+
+### AWS Trust Advisor
+
+Online resource to help reduce cost, increase performance and improve security and fault tolerance by optimizing your AWS environment.
+
 ## Infrastructure Security
+
+### KMS
+
+- MUST DO: read KMS FAQ
 
 ## Data Protection With VPCs
 
