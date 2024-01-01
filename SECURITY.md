@@ -132,6 +132,15 @@ Online resource to help reduce cost, increase performance and improve security a
 ### KMS
 
 - MUST DO: read KMS FAQ
+- Keys are region based
+- Min 7 days waiting period for key deletion, + getting error message about key being in deletion process
+- External managed keys CMK (Customer Master Key - imported material) are done through wrapping key and import token to secure the transfer
+  - No need to wait 7 days for deletion
+  - Same key can be re-imported (same key for all regions)
+  - custom key generation choice
+- AWS KMS keys are rotated every year
+- Able to encrypt a non-encrypted EBS from a snapshot, when copying it, or can change the key used to encrypt the volume
+- EC2 keypair only appends the key to any existing authorized_keys file existing in the base image. Can be used to restore access using keys only with a new image creation and new instance.
 
 ## Data Protection With VPCs
 
