@@ -142,6 +142,78 @@ Online resource to help reduce cost, increase performance and improve security a
 - Able to encrypt a non-encrypted EBS from a snapshot, when copying it, or can change the key used to encrypt the volume
 - EC2 keypair only appends the key to any existing authorized_keys file existing in the base image. Can be used to restore access using keys only with a new image creation and new instance.
 
+#### KMS Grants
+
+Grants are an alternative access control mechanism to a Key Policy:
+
+- done programmatically, delegate the use of KMS CMKs to other AWS principals (a user - in another account)
+- temporary, granular permissions (encrypt, decrypt, re-encrypt, describekey...)
+- allow access, **not deny**
+- use Key policies for relatively static permissions and explicit deny.
+
+Used for just in-time access to key material for key operations.
+
+```console
+#Create a new key and make a note of the region you are working in
+aws kms create-key
+
+#Test encrypting plain text using my new key:
+aws kms encrypt --plaintext "hello" --key-id <key_arn>
+
+#Create a new user called Dave and generate access key / secret access key
+aws iam create-user --user-name dave
+aws iam create-access-key --user-name dave
+
+#Run aws configure using Dave's credentials creating a CLI profile for him
+aws configure --profile dave
+aws kms encrypt --plaintext "hello" --key-id <key_arn> --profile dave
+
+#Create a grant for user called Dave
+aws iam get-user --user-name dave
+aws kms create-grant --key-id <key_arn> --grantee-principal <Dave's_arn> --operations "Encrypt"
+
+#Encrypt plain text as user Dave:
+aws kms encrypt --plaintext "hello" --key-id <key_arn> --grant-tokens <grant_token_from_previous_command> --profile dave
+
+#Revoke the grant:
+aws kms list-grants --key-id <key_arn>
+aws kms revoke-grant --key-id <key_arn> --grant-id <grant_id>
+
+#Check that the revoke was successful:
+aws kms encrypt --plaintext "hello" --key-id <key_arn> --profile dave
+
+https://docs.aws.amazon.com/cli/latest/reference/kms/create-grant.html
+```
+
+#### KMS Policy Conditions
+
+Specific policies for KMS, most import is `kms:ViaService`: a condition key which can allow or deny access to your CMK depending on which service originated the request.
+
+#### KMS cross account
+
+Enable access in the Key Policy for the external account in the account which owns the CMK, enable access to KMS in the IAM policy for the external account, both required in order for the share access to work.
+
+### AWS WAF & Shield
+
+- CloudFront WAF is global
+- ALB WAF is regional
+- WAF: can allow, deny or count request
+- CloudFront can be used to protect website not hosted on AWS (support custom origin)
+
+- Shield, simple mode activated by default to protect against DDoS
+- Advanced mode with incident response team and in depth reporting, not paying for resources due to DDoS attack
+
+### Dedicated instances vs Hosts
+
+Both on dedicated physical hardware but the main differences are from the dedicated hosts:
+
+- provide a static list of physical hosts
+- pay per the host, not the instances
+- visibility over the physical resources (sockets, cores, host ID)
+
+Dedicated hosts are usually needed with regulatory requirements or licensing conditions.
+
+
 ## Data Protection With VPCs
 
 ## Incident Response & AWS In The Real World
