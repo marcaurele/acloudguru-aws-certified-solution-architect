@@ -132,7 +132,8 @@ Online resource to help reduce cost, increase performance and improve security a
 ### KMS
 
 - MUST DO: read KMS FAQ
-- Keys are region based
+- Keys are region based, but option can be activated to have a multi-region one (replicated) - region selection required.
+- CMK can be rotate automatically once a year.
 - Min 7 days waiting period for key deletion, + getting error message about key being in deletion process
 - External managed keys CMK (Customer Master Key - imported material) are done through wrapping key and import token to secure the transfer
   - No need to wait 7 days for deletion
@@ -141,6 +142,10 @@ Online resource to help reduce cost, increase performance and improve security a
 - AWS KMS keys are rotated every year
 - Able to encrypt a non-encrypted EBS from a snapshot, when copying it, or can change the key used to encrypt the volume
 - EC2 keypair only appends the key to any existing authorized_keys file existing in the base image. Can be used to restore access using keys only with a new image creation and new instance.
+- Keys admin can administrate but not use.
+- Keys users can use the key but not manage it (rotation, ...).
+- Key in the destination region must be used for cross region replication.
+- Imported key material, AWS manages lifecycle of the key, if the key has an expiry, it is automatically deleted at that date without soft deletion period.
 
 #### KMS Grants
 
@@ -213,8 +218,9 @@ Both on dedicated physical hardware but the main differences are from the dedica
 
 Dedicated hosts are usually needed with regulatory requirements or licensing conditions.
 
-
 ## Data Protection With VPCs
+
+- Session Manager (recall): use to perform remote login on EC2 instance without opening a port (done through AWS HTTP API). Can be used with browser, cli or SDK to have bash/powershell sessions. All logged (all commands and their output).
 
 ## Incident Response & AWS In The Real World
 
