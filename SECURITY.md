@@ -222,6 +222,57 @@ Dedicated hosts are usually needed with regulatory requirements or licensing con
 
 - Session Manager (recall): use to perform remote login on EC2 instance without opening a port (done through AWS HTTP API). Can be used with browser, cli or SDK to have bash/powershell sessions. All logged (all commands and their output).
 
+### HSM
+
+- single tenant
+- price per usage now
+
+```console
+openssl genrsa -aes256 -out customerCA.key 2048
+openssl req -new -x509 -days 3652 -key customerCA.key -out customerCA.crt
+nano <cluster_id>_ClusterCsr.csr
+openssl x509 -req -days 3652 -in <cluster_id>_ClusterCsr.csr \
+                              -CA customerCA.crt \
+                              -CAkey customerCA.key \
+                              -CAcreateserial \
+                              -out <cluster_id>_CustomerHsmCertificate.crt
+wget https://s3.amazonaws.com/cloudhsmv2-software/CloudHsmClient/EL7/cloudhsm-client-latest.el7.x86_64.rpm
+sudo yum install -y ./cloudhsm-client-latest.el7.x86_64.rpm
+cp customerCA.crt /opt/cloudhsm/etc/customerCA.crt
+sudo /opt/cloudhsm/bin/configure -a <cluster_IP>
+/opt/cloudhsm/bin/cloudhsm_mgmt_util /opt/cloudhsm/etc/cloudhsm_mgmt_util.cfg
+enable_e2e
+listUsers
+loginHSM PRECO admin password
+changePswd PRECO admin <NewPassword>
+listUsers
+logoutHSM
+loginHSM CO admin acloudguru
+createUser CU ryan acloudguru
+listUsers
+logoutHSM
+quit
+sudo service cloudhsm-client start
+/opt/cloudhsm/bin/key_mgmt_util
+loginHSM -u CU -s ryan -p acloudguru
+genSymKey -t 31 -s 32 -l aes256
+genRSAKeyPair -m 2048 -e 65537 -l rsa2048
+genSymKey -t 31 -s 16 -sess -l export-wrapping-key
+exSymKey -k <symmetric_key> -out aes256.key.exp -w <wrapping_key>
+exportPrivateKey -k <private_key> -out rsa2048.key.exp -w <wrapping_key>
+exportPubKey -k 22 -out rsa2048.pub.exp
+logoutHSM
+exit
+```
+
+- 2 accounts created by default: PRECO (Precrypto Officer) and CO (Crypto Officer)
+- 2 other extra types of user: CU (Crypto User) and AU (Appliance User)
+- CO: performs user management
+- CU: for key management: create, delete, share, import, export, encrypt, decrypt, sign, verify
+- AU: manage the appliance - cloning, syncing.
+
+*<https://docs.aws.amazon.com/cloudhsm/latest/userguide/manage-hsm-users-chsm-cli.html#user-permissions-table-chsm-cli>*
+
 ## Incident Response & AWS In The Real World
 
 ## Updates Based On Student Feedback

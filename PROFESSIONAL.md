@@ -451,6 +451,7 @@ Multi-protocol Label Switching](https://d1.awsstatic.com/whitepapers/Networking/
 - ✔️ [AWS re:Invent 2022 - Dive deep on AWS networking infrastructure (NET402)](https://www.youtube.com/watch?v=HJNR_dX8g8c)
 - [AWS re:Invent 2018: Best Practices for AWS PrivateLink (NET301)](https://www.youtube.com/watch?v=85DbVGLXw3Y)
 - [AWS re:Invent 2018: [NEW LAUNCH] AWS Transit Gateway & Transit VPCs, Ref Arch for Many VPCs (NET402)](https://www.youtube.com/watch?v=ar6sLmJ45xs)
+- [AWS re:Invent 2019: [REPEAT 1] AWS Transit Gateway reference architectures for many VPCs (NET406-R1)](https://www.youtube.com/watch?v=9Nikqn_02Oc)
 
 ## Security
 
