@@ -129,6 +129,8 @@ Online resource to help reduce cost, increase performance and improve security a
 
 ## Infrastructure Security
 
+Custom SSL certificate can be stored in IAM in regions where ACM is not available.
+
 ### KMS
 
 - MUST DO: read KMS FAQ
@@ -274,6 +276,10 @@ exit
 *<https://docs.aws.amazon.com/cloudhsm/latest/userguide/manage-hsm-users-chsm-cli.html#user-permissions-table-chsm-cli>*
 
 ## Incident Response & AWS In The Real World
+
+- AWS Shield: free service that protects AWS customers on ELB, CloudFront and Route53. Protect against SYN/UDP floods, reflection attacks and other layer 3+4. Paying package provides more advanced protection.
+- AWS WAf only works with CloudFront and Application Load Balancer.
+- API Gateway have a default 10K req./s for steady-state, burst limit of 5K. Cache, by default to 5 minutes and up to 1 hour.
 
 ## Updates Based On Student Feedback
 
