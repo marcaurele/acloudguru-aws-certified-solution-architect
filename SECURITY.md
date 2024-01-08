@@ -283,6 +283,32 @@ exit
 
 ## Updates Based On Student Feedback
 
+### Amazon Macie
+
+Fully managed data security and data privacy service that uses machine learning and pattern matching to discover, monitor, and protect **your sensitive data stored in your data lake**. Macie can be used to scan your data lakes and discover sensitive information such as PII or financial data, and identify and report overly permissive or unencrypted buckets. Great for PCS-DSS compliance. Mainly scanning S3 bucket content to classify data.
+
+### AWS GuardDuty
+
+AWS GuardDuty is a managed service that can watch CloudTrail, VPC Flow Logs and DNS Logs, **watching for malicious activity**. It has a build-in list of suspect IP addresses and you can also upload your own lists of IPs. GuardDuty can trigger CloudWatch events which can then be used for a variety of activities like notifications or automatically responding to a threat based on Lambdas.
+
+### SES - Simple Email Service
+
+Can use standard SMTP interface or SES API to send emails. Use port `587` or `2587` to avoid throttling which occurs on port `25` by AWS. Need to configure SG to allow communication with the corresponding port.
+
+### Security Hub
+
+Central hub for AWS alerts and findings coming from their security tools:
+
+- GuardDuty
+- Macie
+- Inspector
+- IAM Access Analyzer
+- Firewall Manager
+- 3rd party tools
+- CloudWatch + events -> triggering Lambda actions
+
+Provide an ongoing security audit.
+
 ## Troubleshooting Scenarios
 
 ## Links
