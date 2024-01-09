@@ -309,6 +309,30 @@ Central hub for AWS alerts and findings coming from their security tools:
 
 Provide an ongoing security audit.
 
+### AWS Artifact
+
+Central resource to download compliance and security documents. Can also evaluate your own cloud architecture. Can be used to assess effectiveness of current company controls.
+
+### Notes
+
+No packet inspection tool from AWS, only available using 3rd party vendors (on the marketplace).
+
+## Read and watch
+
+### Read
+
+- [ ] KMS Best practices
+- [ ] KMS crypto details
+- [ ] DDOS best practices
+- [ ] Logging in AWS
+- [ ] well architecture frameowkr, security pillar
+
+### Watch
+
+- [ ] [AWS re:invent 2017: Best Practices for Implementing AWS Key Management Service (SID330)](https://www.youtube.com/watch?v=X1eZjXQ55ec)
+- [ ] [AWS re:Invent 2017: A Deep Dive into AWS Encryption Services (SID329)](https://www.youtube.com/watch?v=gTZgxsCTfbk)
+- [ ] [Best Practices for DDoS Mitigation on AWS](https://www.youtube.com/watch?v=HnoZS5jj7pk)
+
 ## Troubleshooting Scenarios
 
 ## Links
