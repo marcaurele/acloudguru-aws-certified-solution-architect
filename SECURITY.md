@@ -335,6 +335,10 @@ No packet inspection tool from AWS, only available using 3rd party vendors (on t
 
 ## Troubleshooting Scenarios
 
+- [IAM Policy evaluation logic](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html)
+- KMS: keys themselves require key policy (admin, user or external account access)
+
+
 ## Links
 
 - [Best practices for Security, Identity & Compliance](https://aws.amazon.com/architecture/security-identity-compliance/?cards-all.sort-by=item.additionalFields.sortDate&cards-all.sort-order=desc&awsf.content-type=*all&awsf.methodology=*all)
