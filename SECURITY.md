@@ -40,6 +40,13 @@ Can't deny.
 
 - S3 ACL's are for fine grained access controls on individual file/object. Only ACLs allow you define object level permissions in S3.
 - Bucket policies limited to 20kb, might require to use ACLs.
+- IAM policy condition to ensure it's through HTTPS is:
+
+```json
+"Condition": {
+  "Bool": {"aws:SecureTransport": true}
+}
+```
 
 ### Conflicts
 
@@ -50,16 +57,6 @@ What happens when IAM policy conflicts with an S3 policy which conflicts with an
 -> Is there an explicit DENY
 -> Is there an explicit ALLOW, yes then ALLOW
 -> otherwise DENY
-
-### S3
-
-- IAM policy condition to ensure it's through HTTPS is:
-
-```json
-"Condition": {
-  "Bool": {"aws:SecureTransport": true}
-}
-```
 
 ### S3 Cross Region Replication
 
@@ -337,7 +334,6 @@ No packet inspection tool from AWS, only available using 3rd party vendors (on t
 
 - [IAM Policy evaluation logic](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html)
 - KMS: keys themselves require key policy (admin, user or external account access)
-
 
 ## Links
 

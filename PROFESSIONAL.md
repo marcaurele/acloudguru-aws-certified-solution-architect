@@ -349,12 +349,12 @@ Decentralized ownership
 - hybrid cloud
 - AWS console and custom region
 - Outpost Rack:
-    - start with single 42U rack up to 96 racks
-    - gives same AWS services (most of them) locally
+  - start with single 42U rack up to 96 racks
+  - gives same AWS services (most of them) locally
 - Outpost Server:
-    - individual server 1U or 2U
-    - when small space requirements
-    - provide local compute and network (branch offices, retail store,...)
+  - individual server 1U or 2U
+  - when small space requirements
+  - provide local compute and network (branch offices, retail store,...)
 
 ## Network
 
