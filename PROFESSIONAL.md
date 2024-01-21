@@ -375,7 +375,7 @@ Decentralized ownership
 ### Services
 
 - AWS managed VPN: simple VPN connection, either client based, or for site-to-site. Site-to-site can be used in combination of Global Accelerator to route traffic to the closest AWS edge location.
-- AWS Direct Connect: dedicated network connection to AWS backbone (not encrypted by default - use AWS Direct Connect Plus VPN)
+- AWS Direct Connect: dedicated network connection to AWS backbone (**not encrypted by default** - use AWS Direct Connect Plus VPN)
 - AWS VPN CloudHub: establishing a hub-and-spoke model for connecting remote branch offices through a VPN (routes are advertised to let each site communicate with each other).
 - Software VPN: provide your own VPN like OpenVPN
 - Transit VPC: connecting geographically disperse VPCs (like a hub of VPCs), also to connect external providers VPCs like Azure. Can address the overlapping CIDR problem. Additional filtering can be done over the traffic. PrivateLink endpoints are accessible cross regions.
@@ -402,6 +402,7 @@ Decentralized ownership
 
 ### CloudFront
 
+- ACM certs, or imported certs must be in `us-east-1` to be used by CloudFront.
 - [How do I use CloudFront to serve a static website hosted on Amazon S3?](https://aws.amazon.com/premiumsupport/knowledge-center/cloudfront-serve-static-website/)
 - [Values that you specify when you create or update a distribution](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html)
 

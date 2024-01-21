@@ -103,6 +103,9 @@ Info logged:
 - Request parameters
 - Response elements returned by the service
 
+- You can have CloudTrail deliver log files from multiple AWS accounts into a single Amazon S3 bucket. To accomplish this, turn on CloudTrail in the account where the destination bucket will belong, configure the bucket policy to allow cross-account permission. Turn on CloudTrail in the other accounts, configure all accounts to log to the destination bucket.
+- A trail configuration can only reference a single S3 bucket.
+
 ### CloudWatch
 
 #### CloudWatch Events
@@ -207,6 +210,12 @@ Enable access in the Key Policy for the external account in the account which ow
 - Shield, simple mode activated by default to protect against DDoS
 - Advanced mode with incident response team and in depth reporting, not paying for resources due to DDoS attack
 
+### AWS Network Firewall
+
+AWS Network Firewall provides active traffic flow inspection with real-time network and application layer protections against vulnerability exploits and brute force attacks. You can filter network traffic at the perimeter of your VPC using AWS Network Firewall. Network Firewall is a stateful, managed, network firewall and intrusion detection and prevention service. Rule groups in AWS Network Firewall provide detailed criteria for packet inspection and specify what to do when a packet matches the criteria. When Network Firewall finds a match between the criteria and a packet, the packet matches the rule group.
+
+Side note: AWS Network Firewall does not support deep packet inspection for encrypted traffic. As a work around, you can decrypt traffic using a NLB before sending it to the AWS Network Firewall endpoint.
+
 ### Dedicated instances vs Hosts
 
 Both on dedicated physical hardware but the main differences are from the dedicated hosts:
@@ -220,6 +229,8 @@ Dedicated hosts are usually needed with regulatory requirements or licensing con
 ## Data Protection With VPCs
 
 - Session Manager (recall): use to perform remote login on EC2 instance without opening a port (done through AWS HTTP API). Can be used with browser, cli or SDK to have bash/powershell sessions. All logged (all commands and their output).
+- VPC flows have no impact on performance as they are done outside of the of the path of the network traffic.
+- The default DHCP Options from a VPC cannot be edited to set a custom DNS server (in -house), a new DHCP option must be created and assigned to the VPC.
 
 ### HSM
 
@@ -277,6 +288,22 @@ exit
 - AWS Shield: free service that protects AWS customers on ELB, CloudFront and Route53. Protect against SYN/UDP floods, reflection attacks and other layer 3+4. Paying package provides more advanced protection.
 - AWS WAf only works with CloudFront and Application Load Balancer.
 - API Gateway have a default 10K req./s for steady-state, burst limit of 5K. Cache, by default to 5 minutes and up to 1 hour.
+- Permitted services for penetration testing:
+  - Amazon EC2 instances, WAF, NAT Gateways, and Elastic Load Balancers
+  - Amazon RDS
+  - Amazon CloudFront
+  - Amazon Aurora
+  - Amazon API Gateways
+  - AWS AppSync
+  - AWS Lambda and Lambda Edge functions
+  - Amazon Lightsail resources
+  - Amazon Elastic Beanstalk environments
+  - Amazon Elastic Container Service
+  - AWS Fargate
+  - Amazon Elasticsearch
+  - Amazon FSx
+  - Amazon Transit Gateway
+  - S3 hosted applications (targeting S3 buckets is strictly prohibited).
 
 ## Updates Based On Student Feedback
 
