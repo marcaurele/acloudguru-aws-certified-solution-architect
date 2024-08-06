@@ -541,13 +541,14 @@ Amazon Inspector is an automated vulnerability management service that continual
 - ✔️ [Organizing Your AWS Environment Using Multiple Accounts](https://docs.aws.amazon.com/whitepapers/latest/organizing-your-aws-environment/organizing-your-aws-environment.html) (level 200)
 - [AWS Best Practices for DDoS Resiliency](https://d1.awsstatic.com/whitepapers/Security/DDoS_White_Paper.pdf)
 - [AWS re:Invent 2017: Best Practices for Managing Security Operations on AWS](https://www.youtube.com/watch?v=gjrcoK8T3To)
-- ✔️ [AWS re:Invent 2018: [REPEAT 1] Become an IAM Policy Master in 60 Minutes or Less](https://www.youtube.com/watch?v=YQsK4MtsELU) (nice)
-- ✔️ [AWS re:Invent 2017: Architecting Security and Governance Across a Multi-Account Stra](https://www.youtube.com/watch?v=71fD8Oenwxc) (not that great)
-- ✔️ [AWS re:Inforce 2019: Managing Multi-Account AWS Environments Using AWS Organizations](https://www.youtube.com/watch?v=fxo67UeeN1A)
-- ✔️ [AWS Well-Architected Framework - Security Pillar](https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/wellarchitected-security-pillar.pdf)
-- ✔️ [AWS re:Invent 2017: Best Practices for Implementing AWS Key Management Service](https://www.youtube.com/watch?v=X1eZjXQ55ec) (level 300)
+- [AWS re:Invent 2018: [REPEAT 1] Become an IAM Policy Master in 60 Minutes or Less](https://www.youtube.com/watch?v=YQsK4MtsELU) (nice)
+- [AWS re:Invent 2017: Architecting Security and Governance Across a Multi-Account Stra](https://www.youtube.com/watch?v=71fD8Oenwxc) (not that great)
+- [AWS re:Invent 2019: Architecting security & governance across your landing zone](https://www.youtube.com/watch?v=zVJnenaD3U8) (updated one from previous talk)
+- [AWS re:Inforce 2019: Managing Multi-Account AWS Environments Using AWS Organizations](https://www.youtube.com/watch?v=fxo67UeeN1A)
+- [AWS Well-Architected Framework - Security Pillar](https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/wellarchitected-security-pillar.pdf)
+- [AWS re:Invent 2017: Best Practices for Implementing AWS Key Management Service](https://www.youtube.com/watch?v=X1eZjXQ55ec) (level 300)
 - [AWS re:Invent 2017: A Deep Dive into AWS Encryption Services](https://www.youtube.com/watch?v=gTZgxsCTfbk) (level 300)
-- ✔️ [AWS re:Inforce 2022 - AWS Identity and Access Management (IAM) deep dive](https://www.youtube.com/watch?v=YMj33ToS8cI) (level 300)
+- [AWS re:Inforce 2022 - AWS Identity and Access Management (IAM) deep dive](https://www.youtube.com/watch?v=YMj33ToS8cI) (level 300)
 
 ## Migrations
 
