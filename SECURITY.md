@@ -210,6 +210,10 @@ Enable access in the Key Policy for the external account in the account which ow
 - Shield, simple mode activated by default to protect against DDoS
 - Advanced mode with incident response team and in depth reporting, not paying for resources due to DDoS attack
 
+### AWS System Manager
+
+- Patch manager: automated on EC2, on-prem, or multi-cloud to check OS patching. Automation with runbooks / playbooks for remediation. State manager: enforce a desire state on an EC2 instance. Run command: to execute command on nodes. Session Manager: access shell on linux, windows, macos; if the SSM agent is installed.
+
 ### AWS Network Firewall
 
 AWS Network Firewall provides active traffic flow inspection with real-time network and application layer protections against vulnerability exploits and brute force attacks. You can filter network traffic at the perimeter of your VPC using AWS Network Firewall. Network Firewall is a stateful, managed, network firewall and intrusion detection and prevention service. Rule groups in AWS Network Firewall provide detailed criteria for packet inspection and specify what to do when a packet matches the criteria. When Network Firewall finds a match between the criteria and a packet, the packet matches the rule group.
@@ -305,15 +309,28 @@ exit
   - Amazon Transit Gateway
   - S3 hosted applications (targeting S3 buckets is strictly prohibited).
 
+### Mapping AWS services to Incident Response plan
+
+- Detection and Analysis:
+  - AWS GuardDuty
+  - Amazon Detective Service
+  - AWS Config
+  - AWS CloudTrail
+- Containment, Eradication and Recovery:
+  - AWS Identity and Access Management
+  - VPC
+  - Lambda: to automate eradication / any actions
+  - Backup: recovery to restore from ransomware
+
 ## Updates Based On Student Feedback
 
 ### Amazon Macie
 
-Fully managed data security and data privacy service that uses machine learning and pattern matching to discover, monitor, and protect **your sensitive data stored in your data lake**. Macie can be used to scan your data lakes and discover sensitive information such as PII or financial data, and identify and report overly permissive or unencrypted buckets. Great for PCS-DSS compliance. Mainly scanning S3 bucket content to classify data.
+Fully managed data security and data privacy service that uses machine learning and pattern matching to discover, monitor, and protect **your sensitive data stored in your data lake**. Macie can be used to scan your data lakes and discover sensitive information such as PII or financial data, and identify and report overly permissive or unencrypted buckets. Great for PCS-DSS compliance. Only scanning S3 bucket content to classify data.
 
 ### AWS GuardDuty
 
-AWS GuardDuty is a managed service that can watch CloudTrail, VPC Flow Logs and DNS Logs, **watching for malicious activity**. It has a build-in list of suspect IP addresses and you can also upload your own lists of IPs. GuardDuty can trigger CloudWatch events which can then be used for a variety of activities like notifications or automatically responding to a threat based on Lambdas.
+AWS GuardDuty is a managed service that can watch CloudTrail, VPC Flow Logs, S3 Data Events and DNS Logs, **watching for malicious activity** (there's more possible input). It has a build-in list of suspect IP addresses and you can also upload your own lists of IPs. GuardDuty can trigger CloudWatch events which can then be used for a variety of activities like notifications or automatically responding to a threat based on Lambdas, SNS, EventBridge, Security Hub. All findings have an unique identifier.
 
 ### SES - Simple Email Service
 
@@ -332,6 +349,10 @@ Central hub for AWS alerts and findings coming from their security tools:
 - CloudWatch + events -> triggering Lambda actions
 
 Provide an ongoing security audit.
+
+Should use the delegated admin access to grant administrative access to a member account for the whole organization.
+
+AWS Security Findings Format (ASFF): standard JSON-based used by Security Hub to process and ingest security findings data.
 
 ### AWS Artifact
 
